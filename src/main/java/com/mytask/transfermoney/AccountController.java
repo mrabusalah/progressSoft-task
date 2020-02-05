@@ -8,6 +8,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class AccountController {
+
     private final AccountService accountService;
 
     public AccountController(AccountService accountService) {
