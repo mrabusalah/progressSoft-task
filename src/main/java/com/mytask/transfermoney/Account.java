@@ -41,14 +41,12 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" +
-                "clientNumber=" + clientNumber +
-                ", clientBalance=" + clientBalance +
-                ", clientName='" + clientName + '\'' +
-                ", clientPhone='" + clientPhone + '\'' +
-                ", clientAddress='" + clientAddress + '\'' +
-                ", clientDescription='" + clientDescription + '\'' +
-                '}';
+        return "clientNumber = " + clientNumber +
+                ", \nclientBalance = " + clientBalance +
+                ", \nclientName = '" + clientName + '\'' +
+                ", \nclientPhone = '" + clientPhone + '\'' +
+                ", \nclientAddress = '" + clientAddress + '\'' +
+                ", \nclientDescription = '" + clientDescription + '\'';
     }
 
     public Long getClientNumber() {

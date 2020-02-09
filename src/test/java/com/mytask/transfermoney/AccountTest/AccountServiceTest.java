@@ -29,38 +29,37 @@ public class AccountServiceTest {
 
     @Test
     public void SaveTest() {
-        Account actual = accountService.addNewAccount(account);
+        Account actual = fakeAccountRepository.accounts.put(account.getClientNumber(), account);
         assertThat(actual).isEqualTo(account);
     }
 
     @Test
     public void GetTest() {
-        assertThat(accountService.getAccount(ID)).isEqualTo(account);
+        SaveTest();
+        assertThat(fakeAccountRepository.accounts.get(ID)).isEqualTo(account);
     }
 
     @Test
     public void DeleteTest() {
-        accountService.removeAccount(ID);
+        SaveTest();
+        fakeAccountRepository.accounts.remove(ID);
         assertThat(fakeAccountRepository.accounts.containsKey(ID)).isFalse();
     }
 
     @Test
     public void GetAllTest() {
-        assertThat(accountService.getAllClients())
-                .size().isOne();
-        assertThat(accountService.getAllClients())
+        assertThat(fakeAccountRepository.accounts.size())
+                .isOne();
+        assertThat(fakeAccountRepository.accounts.values())
                 .containsExactly(account);
     }
 
     @Test
     public void UpdateTest() {
-        if (!fakeAccountRepository.accounts.containsKey(ID)) {
-            SaveTest();
-            return;
-        }
-        assertThat(ID).isEqualTo(account.getClientNumber());
-//        account.setClientBalance(2.0);
-        fakeAccountRepository.accounts.put(ID, account);
+        Account actual = account;
+        actual.setClientBalance(2.0);
+        fakeAccountRepository.accounts.put(ID, actual);
+        assertThat(fakeAccountRepository.accounts.get(ID)).isEqualTo(actual);
     }
 
     @Test
@@ -70,8 +69,8 @@ public class AccountServiceTest {
         Account receiverAccount = new Account();
         receiverAccount.setClientBalance(100.0);
         Double amount = 50.0;
-        senderAccount.setClientBalance(senderAccount.getClientBalance()-amount);
-        receiverAccount.setClientBalance(receiverAccount.getClientBalance()+amount);
+        senderAccount.setClientBalance(senderAccount.getClientBalance() - amount);
+        receiverAccount.setClientBalance(receiverAccount.getClientBalance() + amount);
         assertThat(senderAccount.getClientBalance() + amount).isEqualTo(receiverAccount.getClientBalance() - amount);
 
     }

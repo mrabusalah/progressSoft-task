@@ -21,23 +21,23 @@ public class AccountController {
     }
 
     @RequestMapping("/client/{id}")
-    public Account getAccount(@PathVariable Long id) {
+    public String getAccount(@PathVariable Long id) {
         return accountService.getAccount(id);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/client")
-    public Account addNewAccount(@Valid @RequestBody Account account) {
+    public String addNewAccount(@Valid @RequestBody Account account) {
         return accountService.addNewAccount(account);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/client")
-    public Account updateAccount(@Valid @RequestBody Account account) {
+    public String updateAccount(@Valid @RequestBody Account account) {
         return accountService.updateAccount(account);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/client/{id}")
-    public void removeAccount(@PathVariable Long id) {
-        accountService.removeAccount(id);
+    public String removeAccount(@PathVariable Long id) {
+        return accountService.removeAccount(id);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/client/transfer/{sender}/{receiver}/{amount}/{description}")
