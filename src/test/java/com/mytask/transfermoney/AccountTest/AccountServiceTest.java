@@ -2,7 +2,6 @@ package com.mytask.transfermoney.AccountTest;
 
 import com.mytask.transfermoney.Account;
 import com.mytask.transfermoney.AccountRepository;
-import com.mytask.transfermoney.AccountService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,14 +15,12 @@ public class AccountServiceTest {
 
     private static final Long ID = 1L;
     private Account account;
-    private AccountService accountService;
     private FakeAccountRepository fakeAccountRepository;
 
     @BeforeEach
     void setUp() {
         fakeAccountRepository = new FakeAccountRepository();
         account = new Account(1L, 1.0, "client", "0123456798", "location", "");
-        accountService = new AccountService(fakeAccountRepository);
         fakeAccountRepository.accounts.put(ID, account);
     }
 
@@ -35,13 +32,11 @@ public class AccountServiceTest {
 
     @Test
     public void GetTest() {
-        SaveTest();
         assertThat(fakeAccountRepository.accounts.get(ID)).isEqualTo(account);
     }
 
     @Test
     public void DeleteTest() {
-        SaveTest();
         fakeAccountRepository.accounts.remove(ID);
         assertThat(fakeAccountRepository.accounts.containsKey(ID)).isFalse();
     }
@@ -72,7 +67,6 @@ public class AccountServiceTest {
         senderAccount.setClientBalance(senderAccount.getClientBalance() - amount);
         receiverAccount.setClientBalance(receiverAccount.getClientBalance() + amount);
         assertThat(senderAccount.getClientBalance() + amount).isEqualTo(receiverAccount.getClientBalance() - amount);
-
     }
 
     private static class FakeAccountRepository implements AccountRepository {
@@ -80,9 +74,8 @@ public class AccountServiceTest {
         private Map<Long, Account> accounts = new HashMap<>();
 
         @Override
-        public <S extends Account> S save(S account) {
-            accounts.put(account.getClientNumber(), account);
-            return account;
+        public <S extends Account> S save(S s) {
+            return null;
         }
 
         @Override
@@ -92,10 +85,7 @@ public class AccountServiceTest {
 
         @Override
         public Optional<Account> findById(Long aLong) {
-            if (!accounts.containsKey(aLong)) {
-                return Optional.empty();
-            }
-            return Optional.ofNullable(accounts.get(aLong));
+            return Optional.empty();
         }
 
         @Override
@@ -105,7 +95,7 @@ public class AccountServiceTest {
 
         @Override
         public Iterable<Account> findAll() {
-            return accounts.values();
+            return null;
         }
 
         @Override
@@ -120,7 +110,7 @@ public class AccountServiceTest {
 
         @Override
         public void deleteById(Long aLong) {
-            accounts.remove(aLong);
+
         }
 
         @Override

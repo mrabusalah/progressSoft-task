@@ -60,7 +60,6 @@ public class AccountService {
 
             Optional<Account> senderAcc = accountRepository.findById(sender);
             Optional<Account> receiverAcc = accountRepository.findById(receiver);
-
             Double senderAmount = senderAcc.get().getClientBalance();
             Double receiverAmount = receiverAcc.get().getClientBalance();
             try {

@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: payment-transfer
+  name: payment-transfer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-transfer
+  template:
+    metadata:
+      labels:
+        app: payment-transfer
+    spec:
+      containers:
+      - image: localhost:32000/payment-transfer:v1.0
+        imagePullPolicy: Always
+        env:
+          - name: spring.datasource.url
+            value: jdbc:mysql://172.20.202.33:3306/myBank
+          - name: spring.datasource.username
+            value: root
+          - name: spring.datasource.password
+            value: "P@ssw0rd_root"
+        name: payment-transfer
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "1024Mi"
+            cpu: "2"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
