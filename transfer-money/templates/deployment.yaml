@@ -29,16 +29,31 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
           livenessProbe:
+            initialDelaySeconds: 30
             httpGet:
-              path: /
+              path: /actuator/health
               port: http
           readinessProbe:
+            initialDelaySeconds: 20
             httpGet:
-              path: /
+              path: /actuator/health
               port: http
+          env:
+            - name: spring.datasource.url
+              value: {{ .Values.transferMony.dbUrl }}
+            - name: spring.datasource.username
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "transfer-money.fullname" . }}-db-secret
+                  key: username
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "transfer-money.fullname" . }}-db-secret
+                  key: password
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

@@ -4,9 +4,12 @@
 
 replicaCount: 1
 
+transferMony:
+  dbUrl: "jdbc:mysql://172.20.202.33:3306/myBank"
+
 image:
-  repository: mrabusalah/monday-image
-  tag: v1
+  repository: mrabusalah/transfer-money
+  tag: latest
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -15,7 +18,7 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
