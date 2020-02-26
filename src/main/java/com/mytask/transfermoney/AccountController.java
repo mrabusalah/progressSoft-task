@@ -41,7 +41,7 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/client/transfer/{sender}/{receiver}/{amount}/{description}")
-    public String transferMoney(@PathVariable Long sender, @PathVariable Long receiver, @PathVariable Double amount, @PathVariable String description) {
+    public String transferMoney(@PathVariable Long sender, @PathVariable Long receiver, @PathVariable Double amount, @PathVariable String description) throws Exception {
         return accountService.transferMoney(sender, receiver, amount, description);
     }
 }

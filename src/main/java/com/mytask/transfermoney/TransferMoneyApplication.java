@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class TransferMoneyApplication {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         SpringApplication.run(TransferMoneyApplication.class, args);
     }
 }

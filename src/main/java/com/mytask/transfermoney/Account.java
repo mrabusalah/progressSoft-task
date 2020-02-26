@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull(message = "The client number cannot be empty or null")
+//    @NotNull(message = "The client number cannot be empty or null")
     private Long clientNumber;
     @Positive(message = "The client balance must be more than zero")
     @NotNull(message = "The client balance cannot be empty")

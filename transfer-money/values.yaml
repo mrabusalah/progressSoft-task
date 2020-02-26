@@ -5,7 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: mrabusalah/monday-image
+  tag: v1
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -35,6 +36,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
+  externalPort: 30000
 
 ingress:
   enabled: false

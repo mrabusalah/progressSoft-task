@@ -58,13 +58,18 @@ public class AccountService {
     public String transferMoney(Long sender, Long receiver, Double amount, String description) {
         if (accountRepository.existsById(sender) && accountRepository.existsById(receiver)) {
 
+            Currency currency = new Currency();
+            double rate = currency.getRate();
+
             Optional<Account> senderAcc = accountRepository.findById(sender);
             Optional<Account> receiverAcc = accountRepository.findById(receiver);
+
             Double senderAmount = senderAcc.get().getClientBalance();
             Double receiverAmount = receiverAcc.get().getClientBalance();
+
             try {
-                senderAcc.get().setClientBalance(senderAmount - amount);
-                receiverAcc.get().setClientBalance(receiverAmount + amount);
+                senderAcc.get().setClientBalance(senderAmount - (amount / rate));
+                receiverAcc.get().setClientBalance(receiverAmount + (amount / rate));
 
                 updateAccount(senderAcc.get());
                 updateAccount(receiverAcc.get());
@@ -75,8 +80,10 @@ public class AccountService {
             return "DONE\n" + description;
         } else {
             Long wrongID;
+
             if (accountRepository.existsById(sender)) wrongID = receiver;
             else wrongID = sender;
+
             throw AccountException.notFound(wrongID);
         }
     }
