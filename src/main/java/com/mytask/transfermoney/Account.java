@@ -1,6 +1,9 @@
 package com.mytask.transfermoney;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -12,6 +15,8 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
 //    @NotNull(message = "The client number cannot be empty or null")
     private Long clientNumber;
+    private String clientUsername;
+    private String clientPassword;
     @Positive(message = "The client balance must be more than zero")
     @NotNull(message = "The client balance cannot be empty")
     private Double clientBalance;
@@ -21,29 +26,22 @@ public class Account {
     private String clientPhone;
     private String clientAddress;
     private String clientDescription;
+    private String clientProfilePic;
 
 
-    public Account(Long clientNumber, Double clientBalance, String clientName, String clientPhone, String clientAddress, String clientDescription) {
+    public Account(Long clientNumber, String clientUsername, String clientPassword, Double clientBalance, String clientName, String clientPhone, String clientAddress, String clientDescription, String clientProfilePic) {
         this.clientNumber = clientNumber;
+        this.clientUsername = clientUsername;
+        this.clientPassword = clientPassword;
         this.clientBalance = clientBalance;
         this.clientName = clientName;
         this.clientPhone = clientPhone;
         this.clientAddress = clientAddress;
         this.clientDescription = clientDescription;
+        this.clientProfilePic = clientProfilePic;
     }
 
     public Account() {
-
-    }
-
-    @Override
-    public String toString() {
-        return "clientNumber = " + clientNumber +
-                ", \nclientBalance = " + clientBalance +
-                ", \nclientName = '" + clientName + '\'' +
-                ", \nclientPhone = '" + clientPhone + '\'' +
-                ", \nclientAddress = '" + clientAddress + '\'' +
-                ", \nclientDescription = '" + clientDescription + '\'';
     }
 
     public Long getClientNumber() {
@@ -52,6 +50,22 @@ public class Account {
 
     public void setClientNumber(Long clientNumber) {
         this.clientNumber = clientNumber;
+    }
+
+    public String getClientUsername() {
+        return clientUsername;
+    }
+
+    public void setClientUsername(String clientUsername) {
+        this.clientUsername = clientUsername;
+    }
+
+    public String getClientPassword() {
+        return clientPassword;
+    }
+
+    public void setClientPassword(String clientPassword) {
+        this.clientPassword = clientPassword;
     }
 
     public Double getClientBalance() {
@@ -94,21 +108,33 @@ public class Account {
         this.clientDescription = clientDescription;
     }
 
+    public String getClientProfilePic() {
+        return clientProfilePic;
+    }
+
+    public void setClientProfilePic(String clientProfilePic) {
+        this.clientProfilePic = clientProfilePic;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
         return Objects.equals(clientNumber, account.clientNumber) &&
+                Objects.equals(clientUsername, account.clientUsername) &&
+                Objects.equals(clientPassword, account.clientPassword) &&
                 Objects.equals(clientBalance, account.clientBalance) &&
                 Objects.equals(clientName, account.clientName) &&
                 Objects.equals(clientPhone, account.clientPhone) &&
                 Objects.equals(clientAddress, account.clientAddress) &&
-                Objects.equals(clientDescription, account.clientDescription);
+                Objects.equals(clientDescription, account.clientDescription) &&
+                Objects.equals(clientProfilePic, account.clientProfilePic);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientNumber, clientBalance, clientName, clientPhone, clientAddress, clientDescription);
+        return Objects.hash(clientNumber, clientUsername, clientPassword, clientBalance, clientName, clientPhone, clientAddress, clientDescription, clientProfilePic);
     }
 }
