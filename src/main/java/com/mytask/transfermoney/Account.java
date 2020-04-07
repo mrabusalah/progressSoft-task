@@ -13,8 +13,7 @@ import java.util.Objects;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @NotNull(message = "The client number cannot be empty or null")
-    private Long clientNumber;
+    private Long id;
     private String clientUsername;
     private String clientPassword;
     @Positive(message = "The client balance must be more than zero")
@@ -29,8 +28,8 @@ public class Account {
     private String clientProfilePic;
 
 
-    public Account(Long clientNumber, String clientUsername, String clientPassword, Double clientBalance, String clientName, String clientPhone, String clientAddress, String clientDescription, String clientProfilePic) {
-        this.clientNumber = clientNumber;
+    public Account(Long id, String clientUsername, String clientPassword, Double clientBalance, String clientName, String clientPhone, String clientAddress, String clientDescription, String clientProfilePic) {
+        this.id = id;
         this.clientUsername = clientUsername;
         this.clientPassword = clientPassword;
         this.clientBalance = clientBalance;
@@ -44,12 +43,12 @@ public class Account {
     public Account() {
     }
 
-    public Long getClientNumber() {
-        return clientNumber;
+    public Long getId() {
+        return id;
     }
 
-    public void setClientNumber(Long clientNumber) {
-        this.clientNumber = clientNumber;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getClientUsername() {
@@ -116,13 +115,27 @@ public class Account {
         this.clientProfilePic = clientProfilePic;
     }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", clientUsername='" + clientUsername + '\'' +
+                ", clientPassword='" + clientPassword + '\'' +
+                ", clientBalance=" + clientBalance +
+                ", clientName='" + clientName + '\'' +
+                ", clientPhone='" + clientPhone + '\'' +
+                ", clientAddress='" + clientAddress + '\'' +
+                ", clientDescription='" + clientDescription + '\'' +
+                ", clientProfilePic='" + clientProfilePic + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(clientNumber, account.clientNumber) &&
+        return Objects.equals(id, account.id) &&
                 Objects.equals(clientUsername, account.clientUsername) &&
                 Objects.equals(clientPassword, account.clientPassword) &&
                 Objects.equals(clientBalance, account.clientBalance) &&
@@ -135,6 +148,6 @@ public class Account {
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientNumber, clientUsername, clientPassword, clientBalance, clientName, clientPhone, clientAddress, clientDescription, clientProfilePic);
+        return Objects.hash(id, clientUsername, clientPassword, clientBalance, clientName, clientPhone, clientAddress, clientDescription, clientProfilePic);
     }
 }

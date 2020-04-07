@@ -1,8 +1,8 @@
 package com.mytask.transfermoney;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,75 +16,58 @@ public class AccountService {
     }
 
     public List<Account> getAllClients() {
-        List<Account> accounts = new ArrayList<>();
-        accountRepository.findAll().forEach(accounts::add);
-        return accounts;
+        return (List<Account>) accountRepository.findAll();
     }
 
-    public String addNewAccount(Account account) {
-        if (!accountRepository.existsById(account.getClientNumber())) {
-            accountRepository.save(account);
-            return "Done , code = 200 \nNew Account Added Successfully\n" + account.toString();
-        }
-        throw AccountException.alreadyExist(account.getClientNumber());
+    public Optional<Account> getAccountById(Long id) {
+        return accountRepository.findById(id);
     }
 
-    public String getAccount(Long id) {
+    public Account getAccountByUsername(String username) {
+        return accountRepository.findAccountByClientUsername(username);
+    }
+
+    public Account saveNewAccount(Account account) {
+        account.setClientPassword(new BCryptPasswordEncoder().encode(account.getClientPassword()));
+        return accountRepository.save(account);
+    }
+
+    public Account updateExistAccount(Long id, Account account) {
         if (accountRepository.existsById(id)) {
-            accountRepository.findById(id);
-            return "Done , code = 200 \nThe Account Information is \n" +
-                    accountRepository.findById(id).toString();
+            return accountRepository.save(account);
         }
-        throw AccountException.notFound(id);
+        throw new NullPointerException("Id not found");
     }
 
-    public String updateAccount(Account account) {
-        if (accountRepository.existsById(account.getClientNumber())) {
-            accountRepository.save(account);
-            return "Done , code = 200\nThe New Account Information is\n" +
-                    account.toString();
-        }
-        throw AccountException.notFound(account.getClientNumber());
-    }
-
-    public String removeAccount(Long id) {
+    public void removeAccountById(Long id) {
         if (accountRepository.existsById(id)) {
             accountRepository.deleteById(id);
-            return "Done , code = 200\nThe Account { " + id + " } was deleted";
+        } else {
+            throw new NullPointerException("Id not found");
         }
-        throw AccountException.notFound(id);
     }
 
-    public String transferMoney(Long sender, Long receiver, Double amount, String description) {
-        if (accountRepository.existsById(sender) && accountRepository.existsById(receiver)) {
+    public void transferMoney(Long sender, Long receiver, Double amount) {
+        if (accountRepository.existsById(sender) &&
+                accountRepository.existsById(receiver)) {
 
-            Currency currency = new Currency();
-            double rate = currency.getRate();
+            Optional<Account> senderAccount = getAccountById(sender);
+            Optional<Account> receiverAccount = getAccountById(receiver);
+            if (senderAccount.get().getClientBalance() >= amount) {
 
-            Optional<Account> senderAcc = accountRepository.findById(sender);
-            Optional<Account> receiverAcc = accountRepository.findById(receiver);
+                senderAccount.get().setClientBalance(senderAccount.get().getClientBalance() - amount);
+                receiverAccount.get().setClientBalance(receiverAccount.get().getClientBalance() + amount);
 
-            Double senderAmount = senderAcc.get().getClientBalance();
-            Double receiverAmount = receiverAcc.get().getClientBalance();
+                System.out.println("request arrived here");
 
-            try {
-                senderAcc.get().setClientBalance(senderAmount - (amount / rate));
-                receiverAcc.get().setClientBalance(receiverAmount + (amount / rate));
+                accountRepository.save(senderAccount.get());
+                accountRepository.save(receiverAccount.get());
 
-                updateAccount(senderAcc.get());
-                updateAccount(receiverAcc.get());
-
-            } catch (RuntimeException e) {
-                throw new RuntimeException(e);
+            } else {
+                throw new RuntimeException("Balance not available in account");
             }
-            return "DONE\n" + description;
         } else {
-            Long wrongID;
-
-            if (accountRepository.existsById(sender)) wrongID = receiver;
-            else wrongID = sender;
-
-            throw AccountException.notFound(wrongID);
+            throw new RuntimeException("Id not found");
         }
     }
 }

@@ -1,9 +1,11 @@
 package com.mytask.transfermoney;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -15,33 +17,42 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @RequestMapping("/client")
+    @GetMapping("/clients/all-clients")
     public List<Account> getAllAccounts() {
         return accountService.getAllClients();
     }
 
-    @RequestMapping("/client/{id}")
-    public String getAccount(@PathVariable Long id) {
-        return accountService.getAccount(id);
+    @GetMapping("/clients/{id}")
+    public Optional<Account> getAccountById(@PathVariable Long id) {
+        return accountService.getAccountById(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/client")
-    public String addNewAccount(@Valid @RequestBody Account account) {
-        return accountService.addNewAccount(account);
+    @GetMapping("/profile/{username}")
+    public Account getAccountByUsername(@PathVariable String username) {
+        return accountService.getAccountByUsername(username);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/client")
-    public String updateAccount(@Valid @RequestBody Account account) {
-        return accountService.updateAccount(account);
+    @PostMapping("/clients/create-client")
+    public Account saveNewAccount(@Valid @RequestBody Account account) {
+        account.setClientPassword(new BCryptPasswordEncoder().encode(account.getClientPassword()));
+        return accountService.saveNewAccount(account);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/client/{id}")
-    public String removeAccount(@PathVariable Long id) {
-        return accountService.removeAccount(id);
+
+    @PutMapping("/clients/update-client/{id}")
+    public Account updateExistAccount(@PathVariable Long id, @Valid @RequestBody Account account) {
+        account.setClientPassword(new BCryptPasswordEncoder().encode(account.getClientPassword()));
+        return accountService.updateExistAccount(id, account);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/client/transfer/{sender}/{receiver}/{amount}/{description}")
-    public String transferMoney(@PathVariable Long sender, @PathVariable Long receiver, @PathVariable Double amount, @PathVariable String description) throws Exception {
-        return accountService.transferMoney(sender, receiver, amount, description);
+    @DeleteMapping("/clients/delete-client/{id}")
+    public void removeAccountById(@PathVariable Long id) {
+        accountService.removeAccountById(id);
     }
+
+    @PostMapping("/transfer/{sender}/{receiver}/{amount}")
+    public void transferMoney(@PathVariable Long sender, @PathVariable Long receiver, @PathVariable Double amount, @RequestBody String amountBody) {
+        accountService.transferMoney(sender, receiver, amount);
+    }
+
 }
