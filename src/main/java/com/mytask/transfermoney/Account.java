@@ -1,13 +1,11 @@
 package com.mytask.transfermoney;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Account {
@@ -114,6 +112,7 @@ public class Account {
     public void setClientProfilePic(String clientProfilePic) {
         this.clientProfilePic = clientProfilePic;
     }
+
 
     @Override
     public String toString() {

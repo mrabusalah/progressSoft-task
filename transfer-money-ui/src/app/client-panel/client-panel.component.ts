@@ -2,7 +2,6 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {AccountService} from "../services/account.service";
 import {Account} from "../model/Account";
 import {Router} from "@angular/router";
-import Swal from "sweetalert2";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
@@ -13,8 +12,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class ClientPanelComponent implements OnInit {
 
-
   clients: Account[];
+  currentClient: Account;
   value: number;
   amount: number;
 
@@ -22,68 +21,86 @@ export class ClientPanelComponent implements OnInit {
     this.reloadData()
   }
 
-  ngOnInit(): void {
+  //TODO security issue
+  ngOnInit() {
     this.reloadData();
+    this.accountService.getClientByUsername(localStorage.getItem("username")).subscribe(res => {
+      this.currentClient = res;
+    }, error => {
+      console.log(error);
+    });
   }
 
   private reloadData() {
     this.accountService.getClientsList().subscribe(res => {
       this.clients = res;
-      console.log(res);
     })
   }
 
   transferMoney(id: number) {
     console.log(id);
-    console.log(this.accountService.currentUser);
+    console.log(this.currentClient);
 
-    this.accountService.transferMoney(this.accountService.currentUser['id'], id, this.amount)
+    this.accountService.transferMoney(this.currentClient['id'], id, this.amount)
       .subscribe(res => {
         this.snackBar.open('Transfer Completed Successfully!', 'success', {
           duration: 2000
         });
+      }, error => {
+        console.log(error)
       });
   }
 
-  deleteAccount(id: number) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.value) {
-        this.accountService.deleteClient(id)
-          .subscribe(
-            data => {
-              console.log(data);
-              this.reloadData();
-            },
-            error => {
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-                footer: 'can\'t delete the client'
-              })
-              console.log(error);
-            });
-        Swal.fire(
-          'Deleted!',
-          'The client has been deleted.',
-          'success'
-        )
-      }
-    });
+
+  hide(): void {
+    this.dialog.closeAll();
+  }
+
+  openDialog(template: TemplateRef<any>) {
+    this.dialog.open(template);
   }
 
 
-  viewClient(username: string) {
-    this.router.navigate(['/profile', username]);
-  }
+  // viewClient(username: string) {
+  //   this.router.navigate(['/profile', username]);
+  // }
+
+
+  // deleteAccount(id: number) {
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: "You won't be able to revert this!",
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#3085d6',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Yes, delete it!'
+  //   }).then((result) => {
+  //     if (result.value) {
+  //       this.accountService.deleteClient(id)
+  //         .subscribe(
+  //           data => {
+  //             console.log(data);
+  //             this.reloadData();
+  //           },
+  //           error => {
+  //             Swal.fire({
+  //               icon: 'error',
+  //               title: 'Oops...',
+  //               text: 'Something went wrong!',
+  //               footer: 'can\'t delete the client'
+  //             })
+  //             console.log(error);
+  //           });
+  //       Swal.fire(
+  //         'Deleted!',
+  //         'The client has been deleted.',
+  //         'success'
+  //       )
+  //     }
+  //   });
+  // }
+  //
 
   // async onClientClick(receiverId: number) {
   //   console.log(this.accountService.currentUser)
@@ -168,11 +185,6 @@ export class ClientPanelComponent implements OnInit {
   //     });
   //   }
   // }
-  hide(): void {
-    this.dialog.closeAll();
-  }
 
-  openDialog(template: TemplateRef<any>) {
-    this.dialog.open(template);
-  }
+
 }

@@ -10,8 +10,9 @@ import {Account} from "../model/Account";
 export class AccountService {
 
   private baseUrl = "http://localhost:8080/api";
-  public username: string;
   public currentUser: Account;
+  username: string;
+
 
   constructor(private http: HttpClient, private router: Router) {
   }

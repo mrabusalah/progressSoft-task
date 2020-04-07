@@ -29,14 +29,14 @@ export class LoginComponent implements OnInit {
     this.accountService.userLogin(this.loginForm.value).subscribe(
       res => {
         localStorage.setItem("token", res.token);
-        // TODO
-        this.accountService.username = this.loginForm.controls['username'].value;
 
-        this.accountService.getClientByUsername(this.loginForm.controls['username'].value)
-          .subscribe(res => {
-            console.log(res);
-            this.accountService.currentUser = res;
-          });
+        localStorage.setItem("username", this.loginForm.controls['username'].value);
+
+        // this.accountService.getClientByUsername(this.loginForm.controls['username'].value)
+        //   .subscribe(res => {
+        //     this.accountService.currentUser = res;
+        //     console.log(this.accountService.currentUser);
+        //   });
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           footer: 'Welcome Back ' + localStorage.getItem("username"),
           showConfirmButton: false,
           timer: 2000
-        })
+        });
         if (this.loginForm.controls['username'].value === "bawa3neh") {
           this.router.navigate([`/admin`]);
         } else {
