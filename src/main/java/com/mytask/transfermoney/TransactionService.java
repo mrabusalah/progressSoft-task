@@ -34,8 +34,7 @@ public class TransactionService {
         return transactionRepository.findAllByReceiverIdOrderByDate(id);
     }
 
-
     public List<Transaction> getAllTransactionsById(Long id) {
-        return transactionRepository.findAllBySenderIdOrReceiverIdOrderByDate(id, id);
+        return transactionRepository.findAllBySenderIdOrReceiverIdOrderByDateDesc(id, id);
     }
 }

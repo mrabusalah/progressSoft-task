@@ -4,6 +4,7 @@ import {Account} from "../model/Account";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-client-panel',
@@ -43,11 +44,42 @@ export class ClientPanelComponent implements OnInit {
 
     this.accountService.transferMoney(this.currentClient['id'], id, this.amount)
       .subscribe(res => {
-        this.snackBar.open('Transfer Completed Successfully!', 'success', {
-          duration: 2000
+        let timerInterval;
+        Swal.fire({
+          title: 'wait until finishing the process !',
+          html: 'I will close in <b></b> milliseconds.',
+          timer: 2000,
+          timerProgressBar: true,
+          onBeforeOpen: () => {
+            Swal.showLoading();
+            timerInterval = setInterval(() => {
+              const content = Swal.getContent();
+              if (content) {
+                const b = content.querySelector('b');
+                if (b) {
+                  b.textContent = String(Swal.getTimerLeft())
+                }
+              }
+            }, 100)
+          },
+          onClose: () => {
+            clearInterval(timerInterval);
+            {
+              Swal.fire(
+                'Converted!',
+                'Your Money has been converted.',
+                'success'
+              )
+            }
+          }
         });
       }, error => {
-        console.log(error)
+        console.log(error);
+        Swal.fire(
+          'Cancelled',
+          'Error while transfer money :(',
+          'error'
+        )
       });
   }
 

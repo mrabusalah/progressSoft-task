@@ -9,5 +9,5 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     List<Transaction> findAllByReceiverIdOrderByDate(Long id);
 
-    List<Transaction> findAllBySenderIdOrReceiverIdOrderByDate(Long senderId, Long receiverId);
+    List<Transaction> findAllBySenderIdOrReceiverIdOrderByDateDesc(Long senderId, Long receiverId);
 }

@@ -15,6 +15,9 @@ import {ClientProfileComponent} from './client-profile/client-profile.component'
 import {ClientPanelComponent} from './client-panel/client-panel.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from "./shared/material/material.module";
+import { HomeComponent } from './home/home.component';
+import { ClientListComponent } from './client-list/client-list.component';
+import { TransactionsListComponent } from './transactions-list/transactions-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import {MaterialModule} from "./shared/material/material.module";
     AdminPanelComponent,
     CreateClientComponent,
     ClientProfileComponent,
-    ClientPanelComponent
+    ClientPanelComponent,
+    HomeComponent,
+    ClientListComponent,
+    TransactionsListComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,6 @@ import {MaterialModule} from "./shared/material/material.module";
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule
-
   ],
   providers: [HttpClient,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],

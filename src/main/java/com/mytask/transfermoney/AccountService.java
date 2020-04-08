@@ -3,6 +3,7 @@ package com.mytask.transfermoney;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,7 @@ public class AccountService {
 
     public Account saveNewAccount(Account account) {
         account.setClientPassword(new BCryptPasswordEncoder().encode(account.getClientPassword()));
+        account.setClientBalance(Double.parseDouble(new DecimalFormat("#.000").format(account.getClientBalance())));
         return accountRepository.save(account);
     }
 
@@ -55,8 +57,10 @@ public class AccountService {
             Optional<Account> receiverAccount = getAccountById(receiver);
             if (senderAccount.get().getClientBalance() >= amount) {
 
-                senderAccount.get().setClientBalance(senderAccount.get().getClientBalance() - amount);
-                receiverAccount.get().setClientBalance(receiverAccount.get().getClientBalance() + amount);
+                DecimalFormat numberFormat = new DecimalFormat("#.000");
+
+                senderAccount.get().setClientBalance(Double.parseDouble(numberFormat.format(senderAccount.get().getClientBalance() - amount)));
+                receiverAccount.get().setClientBalance(Double.parseDouble(numberFormat.format(receiverAccount.get().getClientBalance() + amount)));
 
                 System.out.println("request arrived here");
 
