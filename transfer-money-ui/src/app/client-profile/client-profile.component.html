@@ -1,0 +1,119 @@
+<main>
+  <div class="container">
+    <div class="img"
+         style="background-image: linear-gradient(150deg, rgba(63, 174, 255, .3)15%, rgba(63, 174, 255, .3)70%, rgba(63, 174, 255, .3)94%), url(https://www.caltaxadviser.com/wp-content/uploads/2019/10/cash.jpg);height: 350px;background-size: cover;"></div>
+    <div class="card social-prof">
+      <div class="card-body">
+        <div class="wrapper">
+          <img
+            src="{{client['clientProfilePic']}}"
+            alt="" class="user-profile">
+          <h3 class="text-info">{{client['clientName']}}</h3>
+          <p class="text-success" style="text-decoration: underline">$ {{client['clientBalance']}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card text-white text-center bg-info mb-3">
+          <div class="card-header"><h3>Client Info</h3></div>
+          <div class="card-body">
+            <p class="card-text"><strong>Username : </strong>{{client['clientUsername']}}</p>
+            <p class="card-text"><strong>Name : </strong>{{client['clientName']}}</p>
+            <p class="card-text"><strong>Phone : </strong>{{client['clientPhone']}}</p>
+            <p class="card-text"><strong>Address : </strong>{{client['clientAddress']}}</p>
+            <p class="card-text"><strong>Description : </strong>{{client['clientDescription']}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+               aria-controls="nav-home" aria-selected="true">All</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+               aria-controls="nav-profile" aria-selected="false">Sent</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+               aria-controls="nav-contact" aria-selected="false">Received</a>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                  <tr class="bg-info text-center text-light">
+                    <th scope="col">ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">sender</th>
+                    <th scope="col">receiver</th>
+                    <th scope="col">amount</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="text-center" *ngFor="let transaction of transactions">
+                    <th scope="row">{{transaction['id']}}</th>
+                    <td>{{transaction['date']}}</td>
+                    <td>{{transaction['senderId']}}</td>
+                    <td>{{transaction['receiverId']}}</td>
+                    <td>$ {{transaction['amount']}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                  <tr class="bg-info text-center text-light">
+                    <th scope="col">ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Sender</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="text-center" *ngFor="let transaction of transactionsSent">
+                    <th scope="row">{{transaction['id']}}</th>
+                    <td>{{transaction['date']}}</td>
+                    <td>{{transaction['receiverId']}}</td>
+                    <td>$ {{transaction['amount']}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                  <tr class="bg-info text-center text-light">
+                    <th scope="col">ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Received</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="text-center" *ngFor="let transaction of transactionsReceived">
+                    <th scope="row">{{transaction['id']}}</th>
+                    <td>{{transaction['date']}}</td>
+                    <td>{{transaction['senderId']}}</td>
+                    <td>$ {{transaction['amount']}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
