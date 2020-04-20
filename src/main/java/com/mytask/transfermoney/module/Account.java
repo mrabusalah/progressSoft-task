@@ -1,4 +1,4 @@
-package com.mytask.transfermoney;
+package com.mytask.transfermoney.module;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

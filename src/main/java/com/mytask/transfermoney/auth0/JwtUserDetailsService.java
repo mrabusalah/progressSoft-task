@@ -1,8 +1,8 @@
-package com.mytask.transfermoney.jwt;
+package com.mytask.transfermoney.auth0;
 
 
-import com.mytask.transfermoney.Account;
-import com.mytask.transfermoney.AccountRepository;
+import com.mytask.transfermoney.module.Account;
+import com.mytask.transfermoney.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

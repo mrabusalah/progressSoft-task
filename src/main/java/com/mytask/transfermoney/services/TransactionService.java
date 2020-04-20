@@ -1,5 +1,7 @@
-package com.mytask.transfermoney;
+package com.mytask.transfermoney.services;
 
+import com.mytask.transfermoney.module.Transaction;
+import com.mytask.transfermoney.repositories.TransactionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

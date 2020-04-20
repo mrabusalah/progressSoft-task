@@ -1,5 +1,7 @@
-package com.mytask.transfermoney;
+package com.mytask.transfermoney.controlles;
 
+import com.mytask.transfermoney.services.TransactionService;
+import com.mytask.transfermoney.module.Transaction;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

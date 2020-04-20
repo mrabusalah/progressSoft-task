@@ -1,6 +1,6 @@
-package com.mytask.transfermoney.jwt;
+package com.mytask.transfermoney.auth0;
 
-import com.mytask.transfermoney.Account;
+import com.mytask.transfermoney.module.Account;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;

@@ -1,4 +1,4 @@
-package com.mytask.transfermoney.jwt;
+package com.mytask.transfermoney.auth0;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
