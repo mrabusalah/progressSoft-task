@@ -1,7 +1,7 @@
 //package com.mytask.transfermoney.AccountTest;
 //
-//import com.mytask.transfermoney.Account;
-//import com.mytask.transfermoney.AccountRepository;
+//import com.mytask.transfermoney.module.Account;
+//import com.mytask.transfermoney.repositories.AccountRepository;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
 //

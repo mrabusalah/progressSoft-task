@@ -1,5 +1,7 @@
-package com.mytask.transfermoney;
+package com.mytask.transfermoney.services;
 
+import com.mytask.transfermoney.module.Account;
+import com.mytask.transfermoney.repositories.AccountRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ public class AccountService {
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
+
 
     public List<Account> getAllClients() {
         return (List<Account>) accountRepository.findAll();

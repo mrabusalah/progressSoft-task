@@ -1,4 +1,4 @@
-package com.mytask.transfermoney;
+package com.mytask.transfermoney.module;
 
 import com.posadskiy.currencyconverter.CurrencyConverter;
 

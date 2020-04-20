@@ -6,14 +6,15 @@
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto text-center">
           <li class="nav-item active">
             <a class="nav-link text-light" href="/home" routerLinkActive="active"><i class="fas fa-home"></i>
               <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="/clients" routerLinkActive="active">clients</a></li>
+            <a class="nav-link text-light" href="/clients" routerLinkActive="active">clients</a>
+          </li>
           <div class="dropdown" *ngIf="accountService.loggedIn()">
             <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -30,11 +31,14 @@
                 class="fas fa-sign-out-alt"></i><span class="text-success p-2">Logout</span></button>
             </div>
           </div>
+
+          <li *ngIf="!(accountService.loggedIn())">
+            <button (click)="gotoLogin()" class="btn btn-primary" type="button">Login</button>
+          </li>
+          <li *ngIf="!(accountService.loggedIn())">
+            <button (click)="gotoSignUp()" class="btn btn-outline-light" type="button">Sign up</button>
+          </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" *ngIf="!(accountService.loggedIn())">
-          <button class="btn btn-primary my-2 my-sm-0" type="button" routerLink="login">Login</button>
-          <button class="btn btn-outline-light my-2 my-sm-0" type="button" routerLink="add-client">Sign up</button>
-        </form>
       </div>
     </nav>
   </div>

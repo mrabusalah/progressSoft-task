@@ -1,5 +1,6 @@
-package com.mytask.transfermoney;
+package com.mytask.transfermoney.repositories;
 
+import com.mytask.transfermoney.module.Account;
 import org.springframework.data.repository.CrudRepository;
 
 

@@ -1,4 +1,4 @@
-package com.mytask.transfermoney;
+package com.mytask.transfermoney.module;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,17 +1,17 @@
-package com.mytask.transfermoney.jwt;
+package com.mytask.transfermoney.auth0;
 
 
-import com.mytask.transfermoney.Account;
-import com.mytask.transfermoney.AccountRepository;
+import com.mytask.transfermoney.module.Account;
+import com.mytask.transfermoney.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
+import org.springframework.stereotype.Service;
 
 @Component
+@Service("UserService")
 public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -25,8 +25,8 @@ public class JwtUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
-        return new org.springframework.security.core.userdetails.User(user.getClientUsername(), user.getClientPassword(),
-                new ArrayList<>());
+
+        return user;
     }
 
 }

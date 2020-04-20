@@ -1,15 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountService} from "./services/account.service";
-import Swal from "sweetalert2";
-import {Router} from "@angular/router";
+import {AccountService} from './services/account.service';
+import Swal from 'sweetalert2';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements  OnInit{
+export class AppComponent implements OnInit {
   title = 'transfer money';
+
   // username = this.accountService.currentUser['username'];
 
   constructor(public accountService: AccountService, private router: Router) {
@@ -26,7 +27,7 @@ export class AppComponent implements  OnInit{
 
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      text: 'You won\'t be able to revert this!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, logout!',
@@ -38,7 +39,7 @@ export class AppComponent implements  OnInit{
           'logged out!',
           'Your session has been ended.',
           'success'
-        )
+        );
         this.accountService.userLogout();
       } else if (
         /* Read more about handling dismissals below */
@@ -48,7 +49,7 @@ export class AppComponent implements  OnInit{
           'Cancelled',
           'Your session is safe :)',
           'error'
-        )
+        );
       }
     });
   }
@@ -58,5 +59,13 @@ export class AppComponent implements  OnInit{
 
   gotoProfile() {
     // this.router.navigate(['/profile', this.username]);
+  }
+
+  gotoLogin() {
+    this.router.navigate(['login']);
+  }
+
+  gotoSignUp() {
+    this.router.navigate(['add-client']);
   }
 }

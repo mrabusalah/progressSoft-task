@@ -18,7 +18,7 @@ export class AccountService {
   }
 
   userLogin(user: any): Observable<any> {
-    return this.http.post<any>(`http://localhost:8080/authenticate`, user);
+    return this.http.post<any>(`http://localhost:8080/oauth/token`, user);
   }
 
   getClientsList(): Observable<any> {
