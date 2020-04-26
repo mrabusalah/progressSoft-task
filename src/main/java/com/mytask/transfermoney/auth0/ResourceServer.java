@@ -26,16 +26,7 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests().anyRequest()
-//                .antMatchers(HttpMethod.OPTIONS, "/oauth/token")
                 .permitAll()
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers("/oauth/token", "/clients/create-client")
-//                .permitAll()
-//                .and()
-//                .authorizeRequests()
-//                .anyRequest()
-//                .permitAll()
                 .and()
                 .exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }

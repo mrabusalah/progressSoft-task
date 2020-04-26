@@ -55,6 +55,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
                 .scopes("READ", "WRITE")
                 .accessTokenValiditySeconds(-1) // means valid for ever
                 .refreshTokenValiditySeconds(-1);
+
     }
 
     @Override
@@ -71,7 +72,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
 
         tokenEnhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter(), customAccessTokenEnhancer()));
-
+        System.out.println("hi qadiry " + tokenEnhancerChain);
         return tokenEnhancerChain;
     }
 
@@ -82,7 +83,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
         tokenServices.setTokenStore(tokenStore());
         tokenServices.setTokenEnhancer(customAccessTokenEnhancer());
         tokenServices.setReuseRefreshToken(true);
-
+        System.out.println("hi " + tokenServices);
         return tokenServices;
     }
 
