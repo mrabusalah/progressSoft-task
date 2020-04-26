@@ -219,4 +219,7 @@ export class ClientPanelComponent implements OnInit {
   // }
 
 
+  notME(client: Account): boolean {
+    return !!(client.clientUsername !== localStorage.getItem('username'));
+  }
 }

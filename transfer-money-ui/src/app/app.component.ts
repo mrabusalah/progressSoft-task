@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
   }
 
   gotoProfile() {
-    // this.router.navigate(['/profile', this.username]);
+    this.router.navigate(['/profile', localStorage.getItem('username')]);
   }
 
   gotoLogin() {

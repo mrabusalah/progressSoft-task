@@ -1,24 +1,28 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {Account} from "../model/Account";
+import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {Account} from '../model/Account';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
 
-  private baseUrl = "http://localhost:8080/api";
-  public currentUser: Account;
-  username: string;
-
+  private baseUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  userLogin(user: any): Observable<any> {
-    return this.http.post<any>(`http://localhost:8080/oauth/token`, user);
+  userLogin(username: string, password: string): Observable<any> {
+    const headers = {
+      headers: new HttpHeaders({
+        Authorization: 'Basic ' + btoa('app:passApp')
+      })
+    };
+    return this.http.post(`http://localhost:8080/oauth/token?grant_type=password&username=${username}&password=${password}`,
+      {},
+      headers);
   }
 
   getClientsList(): Observable<any> {
@@ -46,16 +50,16 @@ export class AccountService {
   }
 
   userLogout() {
-    this.router.navigate(["/login"]);
+    this.router.navigate(['/login']);
     return localStorage.clear();
   }
 
   loggedIn() {
-    return !!localStorage.getItem("token");
+    return !!localStorage.getItem('access_token');
   }
 
   getToken() {
-    return localStorage.getItem("token");
+    return localStorage.getItem('access_token');
   }
 }
 
