@@ -1,6 +1,7 @@
 package com.mytask.transfermoney.services;
 
 import com.mytask.transfermoney.module.Transaction;
+import com.mytask.transfermoney.repositories.AccountRepository;
 import com.mytask.transfermoney.repositories.TransactionRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,11 @@ import java.util.Optional;
 public class TransactionService {
 
     private final TransactionRepository transactionRepository;
+    private final AccountRepository accountRepository;
 
-    public TransactionService(TransactionRepository transactionRepository) {
+    public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository) {
         this.transactionRepository = transactionRepository;
+        this.accountRepository = accountRepository;
     }
 
     public List<Transaction> getAllTransactions() {
@@ -24,8 +27,18 @@ public class TransactionService {
         return transactionRepository.findById(id);
     }
 
-    public Transaction addTransaction(Transaction transaction) {
-        return transactionRepository.save(transaction);
+    public Transaction addTransaction(Long sender, Long receiver, double amount) {
+        Transaction transaction = new Transaction(sender, receiver, amount);
+
+        if (accountRepository.existsById(transaction.getSenderId())
+                && accountRepository.existsById(transaction.getReceiverId())) {
+
+            if (!(transaction.getReceiverId().equals(transaction.getSenderId())))
+                return transactionRepository.save(transaction);
+            else
+                throw new NullPointerException("you cannot send money to your self");
+        } else
+            throw new NullPointerException("id not available");
     }
 
     public List<Transaction> getAllTransactionsByUserId(Long id) {

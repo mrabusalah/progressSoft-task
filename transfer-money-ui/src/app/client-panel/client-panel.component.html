@@ -22,7 +22,7 @@
                 </mat-form-field>
               </mat-dialog-content>
               <mat-dialog-actions>
-                <button class="btn btn-primary" (click)="transferMoney(client['id']); hide()" [disabled]="!amount">
+                <button class="btn btn-primary" (click)="transferMoney(client['id'] , amount); hide()" [disabled]="!amount">
                   Transfer
                 </button>
                 <button class="btn btn-danger" mat-dialog-close (click)="hide()">Close</button>

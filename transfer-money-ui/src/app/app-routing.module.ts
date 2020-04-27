@@ -12,20 +12,20 @@ import {TransactionsListComponent} from './transactions-list/transactions-list.c
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'admin', component: AdminPanelComponent, canActivate: [UserAuthGuard]},
-  {path: 'add-client', component: CreateClientComponent},
-  {path: 'profile/:username', component: ClientProfileComponent, canActivate: [UserAuthGuard]},
-  {path: 'clients', component: ClientPanelComponent, canActivate: [UserAuthGuard]},
-  {path: 'clients-list', component: ClientListComponent, canActivate: [UserAuthGuard]},
-  {path: 'transactions-list', component: TransactionsListComponent, canActivate: [UserAuthGuard]},
-  {path: 'home', component: HomeComponent, canActivate: [UserAuthGuard]}
+    {path: '', redirectTo: '/home', pathMatch: 'full'},
+    {path: 'login', component: LoginComponent},
+    {path: 'admin', component: AdminPanelComponent, canActivate: [UserAuthGuard]},
+    {path: 'add-client', component: CreateClientComponent},
+    {path: 'profile/:username', component: ClientProfileComponent},
+    {path: 'clients', component: ClientPanelComponent, canActivate: [UserAuthGuard]},
+    {path: 'clients-list', component: ClientListComponent, canActivate: [UserAuthGuard]},
+    {path: 'transactions-list', component: TransactionsListComponent, canActivate: [UserAuthGuard]},
+    {path: 'home', component: HomeComponent, canActivate: [UserAuthGuard]}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {
 }
