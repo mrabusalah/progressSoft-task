@@ -24,11 +24,17 @@ public class AccountService {
     }
 
     public Optional<Account> getAccountById(Long id) {
-        return accountRepository.findById(id);
+        if (accountRepository.existsById(id))
+            return accountRepository.findById(id);
+        else
+            throw new NullPointerException("id not found");
     }
 
     public Account getAccountByUsername(String username) {
-        return accountRepository.findAccountByClientUsername(username);
+        if (accountRepository.existsAccountByClientUsername(username))
+            return accountRepository.findAccountByClientUsername(username);
+        else
+            throw new NullPointerException("username not found");
     }
 
     public Account saveNewAccount(Account account) {

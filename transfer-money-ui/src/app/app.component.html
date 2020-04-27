@@ -1,59 +1,68 @@
 <div class="bg-info">
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-      <a class="navbar-brand text-light" href="#">{{title}}</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto text-center">
-          <li class="nav-item active">
-            <a class="nav-link text-light" href="/home" routerLinkActive="active"><i class="fas fa-home"></i>
-              <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="/clients" routerLinkActive="active">clients</a>
-          </li>
-          <div class="dropdown" *ngIf="accountService.loggedIn()">
-            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-user-cog"></i>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+            <a class="navbar-brand text-light" href="#">{{title}}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button class="dropdown-item" type="button"><i
-                class="far fa-user-circle"></i><span
-                class="text-success p-2" (click)="gotoProfile()">Profile</span></button>
-              <button class="dropdown-item" type="button"><i class="fas fa-sliders-h"></i><span
-                class="text-success p-2">Settings</span>
-              </button>
-              <button class="dropdown-item" type="button" (click)="onLogout()"><i
-                class="fas fa-sign-out-alt"></i><span class="text-success p-2">Logout</span></button>
-            </div>
-          </div>
+            <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto text-center">
+                    <li class="nav-item active">
+                        <a class="nav-link text-light" href="/home" routerLinkActive="active"><i
+                                class="fas fa-home"></i>
+                            <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/clients" routerLinkActive="active">clients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/transactions-list"
+                           routerLinkActive="active">transactions</a>
+                    </li>
+                    <div class="dropdown" *ngIf="accountService.loggedIn()">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2"
+                                data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-cog"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <button class="dropdown-item" type="button" (click)="gotoProfile()">
+                                <i class="far fa-user-circle"></i>
+                                <span class="text-success p-2">Profile</span>
+                            </button>
+                            <button class="dropdown-item" type="button" (click)="gotoSettings()">
+                                <i class="fas fa-sliders-h"></i>
+                                <span class="text-success p-2">Settings</span>
+                            </button>
+                            <button class="dropdown-item" type="button" (click)="onLogout()">
+                                <i class="fas fa-sign-out-alt"></i><span class="text-success p-2">Logout</span>
+                            </button>
+                        </div>
+                    </div>
 
-          <li *ngIf="!(accountService.loggedIn())">
-            <button (click)="gotoLogin()" class="btn btn-primary" type="button">Login</button>
-          </li>
-          <li *ngIf="!(accountService.loggedIn())">
-            <button (click)="gotoSignUp()" class="btn btn-outline-light" type="button">Sign up</button>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
+                    <li *ngIf="!(accountService.loggedIn())">
+                        <button (click)="gotoLogin()" class="btn btn-primary" type="button">Login</button>
+                    </li>
+                    <li *ngIf="!(accountService.loggedIn())">
+                        <button (click)="gotoSignUp()" class="btn btn-outline-light" type="button">Sign up</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </div>
 
 <div class="container">
-  <div class="card">
-    <div class="card-body">
-      <router-outlet></router-outlet>
+    <div class="card">
+        <div class="card-body">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-  </div>
 </div>
 
 <footer class="footer text-center">
-  <div class="container">
-    <span class="text-primary">All Rights Reserved 2020 @ Transfer Money</span>
-  </div>
+    <div class="container">
+        <span class="text-primary">All Rights Reserved 2020 @ Transfer Money</span>
+    </div>
 </footer>

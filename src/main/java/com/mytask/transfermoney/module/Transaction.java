@@ -19,6 +19,13 @@ public class Transaction {
     public Transaction() {
     }
 
+    public Transaction(Long sender, Long receiver, double amount) {
+        this.senderId = sender;
+        this.receiverId = receiver;
+        this.amount = amount;
+        this.date = new Date();
+    }
+
     public Long getId() {
         return id;
     }

@@ -1,10 +1,9 @@
 package com.mytask.transfermoney.controlles;
 
-import com.mytask.transfermoney.services.TransactionService;
 import com.mytask.transfermoney.module.Transaction;
+import com.mytask.transfermoney.services.TransactionService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,8 +42,8 @@ public class TransactionController {
         return transactionService.getTransactionById(id);
     }
 
-    @PostMapping("/transactions/create-transaction")
-    public Transaction addTransaction(@Valid @RequestBody Transaction transaction) {
-        return transactionService.addTransaction(transaction);
+    @PostMapping("/transactions/create-transaction/{sender}/{receiver}/{amount}")
+    public Transaction addTransaction(@PathVariable Long sender, @PathVariable Long receiver, @PathVariable double amount) {
+        return transactionService.addTransaction(sender, receiver, amount);
     }
 }
