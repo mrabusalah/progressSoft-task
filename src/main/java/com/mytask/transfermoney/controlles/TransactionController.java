@@ -2,6 +2,8 @@ package com.mytask.transfermoney.controlles;
 
 import com.mytask.transfermoney.module.Transaction;
 import com.mytask.transfermoney.services.TransactionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +24,12 @@ public class TransactionController {
         return transactionService.getAllTransactions();
     }
 
+    @GetMapping("/transactions/all-transactions/page")
+    public Page<Transaction> getAllTransactionsPage(Pageable pageable) {
+        return transactionService.getAllTransactionsPage(pageable);
+    }
+
+
     @GetMapping("/transactions/all-transactions/{id}")
     public List<Transaction> getAllTransactionsById(@PathVariable Long id) {
         return transactionService.getAllTransactionsById(id);
@@ -41,6 +49,12 @@ public class TransactionController {
     public Optional<Transaction> getTransactionById(@PathVariable Long id) {
         return transactionService.getTransactionById(id);
     }
+
+//    @RequestMapping(value = "/transactions/all-transactions/pagination", method = RequestMethod.GET)
+//    Page<Transaction> employeesPageable() {
+//        return transactionService.page(pageable);
+//
+//    }
 
     @PostMapping("/transactions/create-transaction/{sender}/{receiver}/{amount}")
     public Transaction addTransaction(@PathVariable Long sender, @PathVariable Long receiver, @PathVariable double amount) {

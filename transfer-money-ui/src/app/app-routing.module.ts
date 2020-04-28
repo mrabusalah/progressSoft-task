@@ -19,7 +19,7 @@ const routes: Routes = [
     {path: 'profile/:username', component: ClientProfileComponent},
     {path: 'clients', component: ClientPanelComponent, canActivate: [UserAuthGuard]},
     {path: 'clients-list', component: ClientListComponent, canActivate: [UserAuthGuard]},
-    {path: 'transactions-list', component: TransactionsListComponent, canActivate: [UserAuthGuard]},
+    {path: 'transactions-list/:page', component: TransactionsListComponent, canActivate: [UserAuthGuard]},
     {path: 'home', component: HomeComponent, canActivate: [UserAuthGuard]}
 ];
 

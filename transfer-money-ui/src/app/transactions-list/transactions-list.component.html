@@ -1,28 +1,45 @@
 <header class="bg-info text-center py-5 mb-4" style="border-radius: 10px;">
-    <div class="container">
-        <h1 class="font-weight-light text-white">All Transaction</h1>
-    </div>
+  <div class="container">
+    <h1 class="font-weight-light text-white">All Transaction</h1>
+  </div>
 </header>
 
 <div class="table-responsive">
-    <table class="table table-striped">
-        <thead class="thead-dark text-center">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Sender</th>
-            <th scope="col">Receiver</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let transaction of transactions" class="text-center">
-            <th scope="row">{{transaction['id']}}</th>
-            <td>{{[transaction['senderId']]}}</td>
-            <td>{{transaction['receiverId']}}</td>
-            <td><strong class="text-success">$ </strong>{{transaction['amount']}}</td>
-            <td>{{transaction['date']}}</td>
-        </tr>
-        </tbody>
-    </table>
+  <table class="table table-striped">
+    <thead class="thead-dark text-center">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Sender</th>
+      <th scope="col">Receiver</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let transaction of transactions['content']" class="text-center">
+      <th scope="row">{{transaction.id}}</th>
+      <td>{{transaction.senderId}}</td>
+      <td>{{transaction.receiverId}}</td>
+      <td><strong class="text-success">$ </strong>{{transaction.amount}}</td>
+      <td>{{transaction.date}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container text-center">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link" href="transactions-list/{{pageNumber - 1}}" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+
+      <li class="page-item" *ngFor="let page of numbers; let i = index">
+        <a class="page-link" href="transactions-list/{{i + 1}}">{{i + 1}}</a>
+      </li>
+
+      <li class="page-item">
+        <a class="page-link" href="transactions-list/{{pageNumber + 1}}">Next</a>
+      </li>
+    </ul>
+  </nav>
 </div>
