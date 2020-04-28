@@ -3,6 +3,14 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+.mvn
+.idea
+.resourceCache
+node_modules
+mvnw
+mvnw.cmd
+nohup.out
+package-lock.json
 
 ### STS ###
 .apt_generated
