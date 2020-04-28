@@ -9,9 +9,9 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
-    List<Transaction> findAllBySenderIdOrderByDate(Long id);
+    List<Transaction> findAllBySenderIdOrderByDateDesc(Long id);
 
-    List<Transaction> findAllByReceiverIdOrderByDate(Long id);
+    List<Transaction> findAllByReceiverIdOrderByDateDesc(Long id);
 
     List<Transaction> findAllBySenderIdOrReceiverIdOrderByDateDesc(Long senderId, Long receiverId);
 }

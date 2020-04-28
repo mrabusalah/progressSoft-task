@@ -3,6 +3,8 @@ package com.mytask.transfermoney.services;
 import com.mytask.transfermoney.module.Transaction;
 import com.mytask.transfermoney.repositories.AccountRepository;
 import com.mytask.transfermoney.repositories.TransactionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +23,10 @@ public class TransactionService {
 
     public List<Transaction> getAllTransactions() {
         return transactionRepository.findAll();
+    }
+
+    public Page<Transaction> getAllTransactionsPage(Pageable pageable) {
+        return transactionRepository.findAll(pageable);
     }
 
     public Optional<Transaction> getTransactionById(Long id) {
@@ -42,14 +48,18 @@ public class TransactionService {
     }
 
     public List<Transaction> getAllTransactionsByUserId(Long id) {
-        return transactionRepository.findAllBySenderIdOrderByDate(id);
+        return transactionRepository.findAllBySenderIdOrderByDateDesc(id);
     }
 
     public List<Transaction> getAllTransactionsByReceiverId(Long id) {
-        return transactionRepository.findAllByReceiverIdOrderByDate(id);
+        return transactionRepository.findAllByReceiverIdOrderByDateDesc(id);
     }
 
     public List<Transaction> getAllTransactionsById(Long id) {
         return transactionRepository.findAllBySenderIdOrReceiverIdOrderByDateDesc(id, id);
+    }
+
+    public Page<Transaction> page(Pageable pageable) {
+        return transactionRepository.findAll(pageable);
     }
 }
