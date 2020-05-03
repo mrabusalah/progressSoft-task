@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Transaction} from '../model/Transaction';
 import {TransactionService} from '../services/transaction.service';
-import {Account} from '../model/Account';
-import Swal from 'sweetalert2';
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {Transaction} from '../model/Transaction';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 @Component({
   selector: 'app-transactions-list',
@@ -12,47 +10,45 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
 })
 export class TransactionsListComponent implements OnInit {
 
-  transactions: Transaction[];
-  client: Account;
-  numbers: number[];
-  pageNumber: number;
+  data: Transaction[];
+  numberOfPages: number;
+  currentPage: number;
 
-  constructor(private activatedRoute: ActivatedRoute, private transactionService: TransactionService) {
+  constructor(private transactionService: TransactionService, private route: ActivatedRoute, private router: Router) {
+    this.route.paramMap.subscribe((param: ParamMap) => {
+      this.currentPage = +param.get('pageId');
+    });
   }
 
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((param: ParamMap) => {
-      this.pageNumber = +param.get('page');
-      console.log(+param.get('problemId'));
-      this.getTransactions(this.pageNumber);
-    });
+    this.loadData();
   }
 
-  getTransactions(pageNumber: number) {
-    this.transactionService.getAllTransactionsPage(pageNumber).subscribe(res => {
-      this.transactions = res;
-      console.log(this.transactions);
-      this.numbers = Array(+(this.transactions['totalPages']));
-      console.log(this.numbers);
-      this.transactions['content'].sort((leftSide, rightSide): number => {
-        if (leftSide.id > rightSide.id) {
-          return -1;
-        }
-        if (leftSide.id < rightSide.id) {
-          return 1;
-        }
-        return 0;
-      });
+  loadData() {
+    this.transactionService.getAllTransactionsPage(this.currentPage , 1).subscribe(res => {
+      this.data = res.content;
+      this.numberOfPages = res.totalPages;
+      console.log(this.numberOfPages);
+      console.log(this.data);
     }, error => {
       console.log(error);
-      Swal.fire(
-        'Error',
-        'Error while getting transactions :(',
-        'error'
-      );
     });
   }
+
+  allowedToShowNext(): boolean {
+    return (this.currentPage !== this.numberOfPages);
+  }
+
+  allowedToShowPrevious() {
+    return (this.currentPage !== 1);
+  }
+
+  counter(numberOfPages: number) {
+    return new Array(numberOfPages);
+  }
+
+  gotoPage(pageNumber: number) {
+    this.router.navigate(['/transactions-list/page', pageNumber]);
+  }
 }
-
-

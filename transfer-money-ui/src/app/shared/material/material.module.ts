@@ -1,29 +1,30 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatButtonModule,
-  MatIconModule,
-  MatButtonToggleModule,
-  MatProgressSpinnerModule,
-  MatToolbarModule,
-  MatSidenavModule,
-  MatMenuModule,
-  MatListModule,
-  MatGridListModule,
-  MatExpansionModule,
-  MatCardModule,
-  MatTabsModule,
-  MatStepperModule,
-  MatInputModule,
-  MatFormFieldModule,
-  MatSelectModule,
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {
   MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
   MatCheckboxModule,
-  MatRadioModule,
   MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
   MatNativeDateModule,
-  MatTooltipModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatSidenavModule,
   MatSnackBarModule,
-  MatDialogModule
+  MatStepperModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 import {A11yModule} from '@angular/cdk/a11y';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -36,7 +37,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatDividerModule} from '@angular/material/divider';
-import { MatRippleModule} from '@angular/material/core';
+import {MatRippleModule} from '@angular/material/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSliderModule} from '@angular/material/slider';
@@ -44,6 +45,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatTreeModule} from '@angular/material/tree';
+
 const MaterialComponents = [
   MatButtonModule,
   MatIconModule,
@@ -114,16 +116,23 @@ const MaterialComponents = [
   MatTreeModule,
   PortalModule,
   ScrollingModule,
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule
 ];
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    MaterialComponents
+    MaterialComponents,
+    CdkTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   exports: [
     MaterialComponents
   ]
 })
-export class MaterialModule { }
+export class MaterialModule {
+}

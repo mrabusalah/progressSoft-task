@@ -18,8 +18,8 @@ export class TransactionService {
     return this.http.get(`${this.baseUrl}/transactions/all-transactions`);
   }
 
-  getAllTransactionsPage(pageNumber: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/transactions/all-transactions/page?page=${pageNumber - 1}&size=15`);
+  getAllTransactionsPage(pageNumber: number, numberOfItems: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/transactions/all-transactions/page?page=${pageNumber - 1}&size=${numberOfItems}`);
   }
 
 
