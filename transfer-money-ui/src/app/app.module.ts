@@ -18,34 +18,38 @@ import {HomeComponent} from './home/home.component';
 import {ClientListComponent} from './client-list/client-list.component';
 import {TransactionsListComponent} from './transactions-list/transactions-list.component';
 import {TokenInterceptorService} from './services/token-interceptor.service';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        AdminPanelComponent,
-        CreateClientComponent,
-        ClientProfileComponent,
-        ClientPanelComponent,
-        HomeComponent,
-        ClientListComponent,
-        TransactionsListComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        SweetAlert2Module,
-        RouterModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MaterialModule
-    ],
-    providers: [HttpClient,
-        {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    AdminPanelComponent,
+    CreateClientComponent,
+    ClientProfileComponent,
+    ClientPanelComponent,
+    HomeComponent,
+    ClientListComponent,
+    TransactionsListComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SweetAlert2Module,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    MatPaginatorModule,
+    NgbModule
+  ],
+  providers: [HttpClient,
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
