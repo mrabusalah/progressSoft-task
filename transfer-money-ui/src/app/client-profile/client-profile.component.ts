@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {AccountService} from "../services/account.service";
-import {Account} from "../model/Account";
-import {Transaction} from "../model/Transaction";
-import {TransactionService} from "../services/transaction.service";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {AccountService} from '../services/account.service';
+import {Account} from '../model/Account';
+import {Transaction} from '../model/Transaction';
+import {TransactionService} from '../services/transaction.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-client-profile',
@@ -12,36 +14,49 @@ import {TransactionService} from "../services/transaction.service";
 })
 export class ClientProfileComponent implements OnInit {
 
-
-  transactions: Transaction[];
-  transactionsSent: Transaction[];
-  transactionsReceived: Transaction[];
-
   username: string;
   client: Account;
-  submitted = false;
 
+  displayedColumns: string[] = ['id', 'from', 'to', 'amount', 'date'];
 
-  constructor(private route: ActivatedRoute, private router: Router, private accountService: AccountService, private transactionService: TransactionService) {
+  transactions: any;
+  transactionsBySender: any;
+  transactionsByReceiver: any;
+
+  @ViewChild(MatPaginator, {static: true}) transactionsPaginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: true}) transactionsPaginatorSender: MatPaginator;
+  @ViewChild(MatPaginator, {static: true}) transactionsPaginatorReceiver: MatPaginator;
+
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private accountService: AccountService,
+              private transactionService: TransactionService) {
     this.route.paramMap.subscribe((param: ParamMap) => {
       this.username = param.get('username');
-      console.log(this.username);
+
       this.accountService.getClientByUsername(this.username)
         .subscribe(data => {
-          console.log(data);
           this.client = data;
-          this.transactionService.getAllTransactionsById(this.client['id']).subscribe(res => {
-            this.transactions = res;
+
+          this.transactionService.getAllTransactionsById(this.client.id).subscribe(res => {
+            this.transactions = new MatTableDataSource<Transaction>(res);
+            this.transactions.paginator = this.transactionsPaginator;
           }, error => {
             console.log(error);
           });
-          this.transactionService.getAllTransactionsByReceiverId(this.client['id']).subscribe(res => {
-            this.transactionsReceived = res;
+
+
+          this.transactionService.getAllTransactionsByReceiverId(this.client.id).subscribe(res => {
+            this.transactionsByReceiver = new MatTableDataSource<Transaction>(res);
+            this.transactionsByReceiver.paginator = this.transactionsPaginatorReceiver;
           }, error => {
             console.log(error);
           });
-          this.transactionService.getAllTransactionsBySenderId(this.client['id']).subscribe(res => {
-            this.transactionsSent = res;
+
+
+          this.transactionService.getAllTransactionsBySenderId(this.client.id).subscribe(res => {
+            this.transactionsBySender = new MatTableDataSource<Transaction>(res);
+            this.transactionsBySender.paginator = this.transactionsPaginatorSender;
           }, error => {
             console.log(error);
           });
@@ -52,13 +67,4 @@ export class ClientProfileComponent implements OnInit {
   ngOnInit() {
     this.client = new Account();
   }
-
-  gotoList() {
-    this.router.navigate(['/home']);
-  }
-
-  gotoProfile(username: string) {
-    this.router.navigate(['/profile', username]);
-  }
-
 }
