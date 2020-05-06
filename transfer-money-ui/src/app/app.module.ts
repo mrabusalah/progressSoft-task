@@ -19,12 +19,13 @@ import {ClientListComponent} from './client-list/client-list.component';
 import {TransactionsListComponent} from './transactions-list/transactions-list.component';
 import {TokenInterceptorService} from './services/token-interceptor.service';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatTableModule} from "@angular/material/table";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSortModule} from "@angular/material/sort";
+import {NotFound404Component} from './not-found404/not-found404.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MatSortModule} from "@angular/material/sort";
     ClientPanelComponent,
     HomeComponent,
     ClientListComponent,
-    TransactionsListComponent
+    TransactionsListComponent,
+    NotFound404Component
   ],
   imports: [
     BrowserModule,

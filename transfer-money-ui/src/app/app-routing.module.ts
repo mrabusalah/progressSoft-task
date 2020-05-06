@@ -9,6 +9,7 @@ import {HomeComponent} from './home/home.component';
 import {ClientPanelComponent} from './client-panel/client-panel.component';
 import {ClientListComponent} from './client-list/client-list.component';
 import {TransactionsListComponent} from './transactions-list/transactions-list.component';
+import {NotFound404Component} from "./not-found404/not-found404.component";
 
 
 const routes: Routes = [
@@ -21,7 +22,10 @@ const routes: Routes = [
   {path: 'clients', component: ClientPanelComponent, canActivate: [UserAuthGuard]},
   {path: 'clients-list', component: ClientListComponent, canActivate: [UserAuthGuard]},
   {path: 'transactions-list/page/:pageId', component: TransactionsListComponent, canActivate: [UserAuthGuard]},
-  {path: 'home', component: HomeComponent, canActivate: [UserAuthGuard]}
+  {path: 'home', component: HomeComponent, canActivate: [UserAuthGuard]},
+  {path: '**', pathMatch: 'full', redirectTo: '/404'},
+  {path: '404', component: NotFound404Component}
+
 ];
 
 @NgModule({
