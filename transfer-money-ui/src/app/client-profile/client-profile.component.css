@@ -1,8 +1,24 @@
+table {
+  width: 100%;
+}
+
+th {
+  color: black;
+  text-align: center;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+
 body {
   background-color: #f0f6ff;
   color: #28384d;
 
 }
+
 /*social */
 .card-one {
   position: relative;
@@ -10,6 +26,7 @@ body {
   background: #fff;
   box-shadow: 0 10px 7px -5px rgba(0, 0, 0, 0.4);
 }
+
 .card {
   margin-bottom: 35px;
   box-shadow: 0 10px 20px 0 rgba(26, 44, 57, 0.14);
@@ -85,12 +102,12 @@ body {
   border: none;
 }
 
-.card .nav>li {
+.card .nav > li {
   position: relative;
   display: block;
 }
 
-.card .nav>li>a {
+.card .nav > li > a {
   position: relative;
   display: block;
   padding: 10px 15px;
@@ -98,13 +115,13 @@ body {
   border-radius: 4px;
 }
 
-.card .nav>li>a:focus,
-.card .nav>li>a:hover {
+.card .nav > li > a:focus,
+.card .nav > li > a:hover {
   text-decoration: none;
   background-color: #eee;
 }
 
-.card .s-nav>li>a.active {
+.card .s-nav > li > a.active {
   text-decoration: none;
   background-color: #3afe;
   color: #fff;
@@ -357,9 +374,11 @@ ul.friend-list .right p {
   font-weight: 700;
   margin-bottom: 20px;
 }
+
 a {
   color: #333;
 }
+
 .badge {
   font-size: 12px;
   line-height: 1;
@@ -371,6 +390,7 @@ a {
   color: #447de8;
   background-color: #e6edff;
 }
+
 .badge {
   display: inline-block;
   padding: .4em .5em;

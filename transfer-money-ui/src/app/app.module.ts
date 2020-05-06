@@ -13,13 +13,18 @@ import {CreateClientComponent} from './create-client/create-client.component';
 import {ClientProfileComponent} from './client-profile/client-profile.component';
 import {ClientPanelComponent} from './client-panel/client-panel.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MaterialModule} from './shared/material/material.module';
+// import {MaterialModule} from './shared/material/material.module';
 import {HomeComponent} from './home/home.component';
 import {ClientListComponent} from './client-list/client-list.component';
 import {TransactionsListComponent} from './transactions-list/transactions-list.component';
 import {TokenInterceptorService} from './services/token-interceptor.service';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatTableModule} from "@angular/material/table";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -42,9 +47,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    // MaterialModule,
     MatPaginatorModule,
-    NgbModule
+    NgbModule,
+    MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSortModule
   ],
   providers: [HttpClient,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}

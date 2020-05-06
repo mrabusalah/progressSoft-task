@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 import {TransactionService} from '../services/transaction.service';
 import {Transaction} from '../model/Transaction';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-transactions-list',
@@ -9,46 +11,27 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
   styleUrls: ['./transactions-list.component.css']
 })
 export class TransactionsListComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'from', 'to', 'amount', 'date'];
+  dataSource: any;
 
-  data: Transaction[];
-  numberOfPages: number;
-  currentPage: number;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private transactionService: TransactionService, private route: ActivatedRoute, private router: Router) {
-    this.route.paramMap.subscribe((param: ParamMap) => {
-      this.currentPage = +param.get('pageId');
-    });
+  constructor(private transactionService: TransactionService) {
   }
 
-
-  ngOnInit(): void {
-    this.loadData();
-  }
-
-  loadData() {
-    this.transactionService.getAllTransactionsPage(this.currentPage , 1).subscribe(res => {
-      this.data = res.content;
-      this.numberOfPages = res.totalPages;
-      console.log(this.numberOfPages);
-      console.log(this.data);
+  ngOnInit() {
+    this.transactionService.getAllTransactions().subscribe(res => {
+      this.dataSource = new MatTableDataSource<Transaction>(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }, error => {
       console.log(error);
     });
   }
 
-  allowedToShowNext(): boolean {
-    return (this.currentPage !== this.numberOfPages);
-  }
-
-  allowedToShowPrevious() {
-    return (this.currentPage !== 1);
-  }
-
-  counter(numberOfPages: number) {
-    return new Array(numberOfPages);
-  }
-
-  gotoPage(pageNumber: number) {
-    this.router.navigate(['/transactions-list/page', pageNumber]);
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
