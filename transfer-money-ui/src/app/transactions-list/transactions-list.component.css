@@ -1,3 +1,13 @@
-.table {
+table {
+  width: 100%;
+}
+
+th {
+  color: black;
+  text-align: center;
+}
+
+.mat-form-field {
+  font-size: 14px;
   width: 100%;
 }
