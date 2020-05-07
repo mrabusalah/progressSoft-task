@@ -26,6 +26,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSortModule} from "@angular/material/sort";
 import {NotFound404Component} from './not-found404/not-found404.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import {NotFound404Component} from './not-found404/not-found404.component';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSortModule
+    MatSortModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [HttpClient,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}

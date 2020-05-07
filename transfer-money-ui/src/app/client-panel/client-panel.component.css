@@ -1,0 +1,22 @@
+.client-image {
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+}
+
+.client-name {
+  margin-bottom: 0;
+}
+
+.temp .btn {
+  margin: 10px;
+  width: 100%;
+}
+
+.temp mat-form-field {
+  width: 100%;
+}
+
+.temp input {
+  height: 30px;
+}

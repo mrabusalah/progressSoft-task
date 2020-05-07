@@ -6,30 +6,53 @@
 
 <div class="container text-center" *ngIf="clients">
   <div class="row">
-    <div *ngFor="let client of clients">
-      <div class="col-xl-3 col-md-6 mb-4" *ngIf="notME(client)">
+    <div class="col-lg-4" *ngFor="let client of clients">
+      <div class="mb-4" *ngIf="notME(client)">
         <div class="card border-0 shadow" (click)="openDialog(transferTemplate)" style="cursor:pointer;">
-          <img src="{{client['clientProfilePic']}}" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h2 class="card-title mb-0 text-info">{{client['clientName']}}</h2>
-            <div class="card-text text-black-50">{{client['clientDescription']}}</div>
-            <ng-template #transferTemplate>
+          <mat-card class="example-card">
+            <div class="row">
+              <div class="col-4">
+                <img src="{{client.clientProfilePic}}"
+                     alt="client-image"
+                     class="client-image">
+              </div>
+              <div class="col-8">
+                <h3 class="client-name">{{client.clientName}}</h3>
+                <h5>@{{client.clientUsername}}</h5>
+              </div>
+            </div>
+          </mat-card>
+          <ng-template #transferTemplate>
+            <div class="text-center temp">
               <h2 mat-dialog-title>Make your transfer</h2>
               <mat-dialog-content class="mat-typography" style="width: 400px; height: auto">
                 <mat-form-field>
                   <mat-label>Amount</mat-label>
-                  <input type="number" matInput [(ngModel)]="amount" name="amount" placeholder="EX. 10$" required>
+                  <input type="number"
+                         matInput
+                         [(ngModel)]="amount"
+                         min="1"
+                         name="amount"
+                         placeholder="EX. 10$"
+                         required>
                 </mat-form-field>
               </mat-dialog-content>
               <mat-dialog-actions>
-                <button class="btn btn-primary" (click)="transferMoney(client['id'] , amount); hide()"
+                <button class="btn btn-primary"
+                        (click)="transferMoney(client['id'] , amount);
+                         hide()"
                         [disabled]="!amount">
                   Transfer
                 </button>
-                <button class="btn btn-danger" mat-dialog-close (click)="hide()">Close</button>
+                <button class="btn btn-danger"
+                        mat-dialog-close
+                        (click)="hide()">
+                  Close
+                </button>
               </mat-dialog-actions>
-            </ng-template>
-          </div>
+            </div>
+          </ng-template>
+          <!--          </div>-->
         </div>
       </div>
     </div>
