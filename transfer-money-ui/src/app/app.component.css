@@ -1,3 +1,11 @@
+.navbar .collapse .navbar-nav li {
+  text-transform: uppercase;
+}
+
+.navbar .collapse .navbar-nav li span {
+  margin-left: 5px;
+}
+
 .footer {
   padding: 20px;
 }

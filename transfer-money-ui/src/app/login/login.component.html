@@ -1,17 +1,17 @@
 <div class="wrapper">
-    <div class="login-bg">
-        <div class="overlay"></div>
-    </div>
-    <div class="container">
-        <h1 class="login-title">Welcome Back</h1>
-        <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <input type="text" name="username" formControlName="username" placeholder="Username">
-            <input type="password" name="password" formControlName="password" placeholder="Password">
-            <button type="submit" [disabled]="!loginForm.valid" id="login-button">Login</button>
-            <div>
-                <label routerLink="/add-user" class="text-primary" style="font-size: small;">Don't have an account ?!
-                    sign up now !!</label>
-            </div>
-        </form>
-    </div>
+  <div class="login-bg">
+    <div class="overlay"></div>
+  </div>
+  <div class="container">
+    <h1 class="login-title">Welcome Back</h1>
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <input type="text" name="username" formControlName="username" placeholder="Username">
+      <input type="password" name="password" formControlName="password" placeholder="Password">
+      <button type="submit" [disabled]="!loginForm.valid" id="login-button">Login</button>
+      <div>
+        <label routerLink="/add-user" class="text-light" style="font-size: small;">Don't have an account ?!
+          sign up now !!</label>
+      </div>
+    </form>
+  </div>
 </div>
