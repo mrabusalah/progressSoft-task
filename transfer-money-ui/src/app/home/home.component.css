@@ -278,6 +278,7 @@
 }
 
 .description h1 {
+  color: #209ad3;
   padding-top: 30px;
   font-size: xx-large;
   font-weight: lighter;
@@ -297,5 +298,13 @@
   border-radius: 0;
   height: 50px;
   padding: 10px;
-  color: #ffffff;
+  color: #fcc700;
+  transition: 0.3s;
+}
+
+.buttons .btn1:hover,
+.buttons .btn2:hover,
+.buttons .btn3:hover {
+  background-color: #209ad3;
+  color: white;
 }
