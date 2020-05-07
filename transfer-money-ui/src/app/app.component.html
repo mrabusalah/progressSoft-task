@@ -8,44 +8,58 @@
       </button>
       <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto text-center">
-          <li class="nav-item active">
-            <a class="nav-link text-light" href="/home" routerLinkActive="active"><i
-              class="fas fa-home"></i>
-              <span class="sr-only">(current)</span></a>
+          <li class="nav-item active" *ngIf="(accountService.loggedIn())">
+            <a class="nav-link text-light" href="/home" routerLinkActive="active">
+              <i class="fas fa-home"></i>
+              <span class="d-none d-lg-block">Home</span>
+              <span class="sr-only">(current)</span>
+            </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="/clients" routerLinkActive="active">clients</a>
+          <li class="nav-item" *ngIf="(accountService.loggedIn())">
+            <a class="nav-link text-light" href="/clients" routerLinkActive="active">
+              <i class="fas fa-users"></i>
+              <span class="d-none d-lg-block">clients</span>
+            </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="(accountService.loggedIn())">
             <a class="nav-link text-light" href="/transactions-list"
-               routerLinkActive="active">transactions</a>
+               routerLinkActive="active">
+              <i class="fas fa-money-bill-wave"></i>
+              <span class="d-none d-lg-block">transactions</span>
+            </a>
           </li>
-          <div class="dropdown" *ngIf="accountService.loggedIn()">
-            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2"
+          <div class="dropdown" *ngIf="(accountService.loggedIn())">
+            <button class="btn btn-info" type="button" id="dropdownMenu2"
                     data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-user-cog"></i>
+              <span class="d-none d-lg-block">Account</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
               <button class="dropdown-item" type="button" (click)="gotoProfile()">
-                <i class="far fa-user-circle"></i>
-                <span class="text-success p-2">Profile</span>
+                <i class="fas fa-user-tie"></i>
+                <span class="text-info p-2">Profile</span>
               </button>
               <button class="dropdown-item" type="button" (click)="gotoSettings()">
                 <i class="fas fa-sliders-h"></i>
-                <span class="text-success p-2">Settings</span>
+                <span class="text-info p-2">Settings</span>
               </button>
               <button class="dropdown-item" type="button" (click)="onLogout()">
-                <i class="fas fa-sign-out-alt"></i><span class="text-success p-2">Logout</span>
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="text-info p-2">Logout</span>
               </button>
             </div>
           </div>
 
-          <li *ngIf="!(accountService.loggedIn())">
-            <button (click)="gotoLogin()" class="btn btn-primary" type="button">Login</button>
+          <li style="margin: 5px;" *ngIf="!(accountService.loggedIn())">
+            <button style="width: 100%;" (click)="gotoLogin()" class="btn btn-primary" type="button">
+              Login
+            </button>
           </li>
-          <li *ngIf="!(accountService.loggedIn())">
-            <button (click)="gotoSignUp()" class="btn btn-outline-light" type="button">Sign up</button>
+          <li style="margin: 5px;" *ngIf="!(accountService.loggedIn())">
+            <button style="width: 100%;" (click)="gotoSignUp()" class="btn btn-outline-light" type="button">
+              Sign up
+            </button>
           </li>
         </ul>
       </div>
