@@ -1,16 +1,11 @@
 <header class="bg-info text-center py-5 mb-4" style="border-radius: 10px;">
   <div class="container">
-    <h1 class="font-weight-light text-white">Craete Account</h1>
+    <h1 class="font-weight-light text-white">Create Account</h1>
   </div>
 </header>
 <div class="container form">
   <form (ngSubmit)="onSubmit()" #myForm="ngForm">
     <div class="row">
-      <!--      <div class="form-group col-12">-->
-      <!--        <input type="hidden" class="form-control" id="id" required value="1"-->
-      <!--               [(ngModel)]="client.id"-->
-      <!--               name="id">-->
-      <!--      </div>-->
       <div class="form-group col-12">
         <mat-form-field class="example-full-width">
           <mat-label>Full Name</mat-label>
@@ -60,10 +55,8 @@
       <div class="form-group col-6">
         <mat-form-field class="example-full-width">
           <mat-label>Image URL</mat-label>
-          <!--          https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png-->
           <input matInput
                  id="clientProfilePic"
-                 required
                  [(ngModel)]="client.clientProfilePic"
                  name="clientProfilePic">
         </mat-form-field>

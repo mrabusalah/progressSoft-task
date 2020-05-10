@@ -29,6 +29,7 @@ export class CreateClientComponent implements OnInit {
           text: 'Client added successfully!',
         });
         console.log(data);
+        this.gotoList();
       }, error => {
         Swal.fire({
           icon: 'error',
@@ -38,7 +39,6 @@ export class CreateClientComponent implements OnInit {
         console.log(error);
       });
     this.client = new Account();
-    this.gotoList();
   }
 
   onSubmit() {

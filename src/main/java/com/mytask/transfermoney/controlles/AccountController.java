@@ -37,7 +37,6 @@ public class AccountController {
 
     @PostMapping("/clients/create-client")
     public Account saveNewAccount(@Valid @RequestBody Account account) {
-        account.setClientPassword(new BCryptPasswordEncoder().encode(account.getClientPassword()));
         return accountService.saveNewAccount(account);
     }
 
