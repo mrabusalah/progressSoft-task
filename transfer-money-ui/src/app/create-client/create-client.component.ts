@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import Swal from "sweetalert2";
-import {Account} from "../model/Account";
-import {AccountService} from "../services/account.service";
-import {Router} from "@angular/router";
+import Swal from 'sweetalert2';
+import {Account} from '../model/Account';
+import {AccountService} from '../services/account.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-client',
@@ -35,7 +35,7 @@ export class CreateClientComponent implements OnInit {
           title: 'Opps...',
           text: 'There is an issue with adding Client!',
         });
-        console.log(error)
+        console.log(error);
       });
     this.client = new Account();
     this.gotoList();

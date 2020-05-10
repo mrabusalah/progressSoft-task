@@ -1,74 +1,126 @@
-<h3>Create Client</h3>
-<div [hidden]="submitted" style="width: 600px;margin: auto">
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <input type="hidden" class="form-control" id="id" required value="1"
-             [(ngModel)]="client['id']"
-             name="id">
-    </div>
-
-    <div class="form-group row">
-      <div class="col-12">
-        <label>Full name</label>
-        <input type="text" class="form-control" id="clientName" placeholder="ex : Abdullah Adel" required
-               [(ngModel)]="client['clientName']"
-               name="clientName">
+<header class="bg-info text-center py-5 mb-4" style="border-radius: 10px;">
+  <div class="container">
+    <h1 class="font-weight-light text-white">Craete Account</h1>
+  </div>
+</header>
+<div class="container form">
+  <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+    <div class="row">
+      <!--      <div class="form-group col-12">-->
+      <!--        <input type="hidden" class="form-control" id="id" required value="1"-->
+      <!--               [(ngModel)]="client.id"-->
+      <!--               name="id">-->
+      <!--      </div>-->
+      <div class="form-group col-12">
+        <mat-form-field class="example-full-width">
+          <mat-label>Full Name</mat-label>
+          <input matInput
+                 id="clientName"
+                 required
+                 [(ngModel)]="client.clientName"
+                 name="clientName">
+        </mat-form-field>
       </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-6">
-        <label>Username</label>
-        <input type="text" class="form-control" id="clientUsername" placeholder="ex : mrabusalah" required
-               [(ngModel)]="client['clientUsername']"
-               name="clientUsername">
+      <div class="form-group col-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Username</mat-label>
+          <input matInput
+                 id="clientUsername"
+                 required
+                 [(ngModel)]="client.clientUsername"
+                 name="clientUsername">
+        </mat-form-field>
       </div>
-      <div class="col-6">
-        <label>Balance</label>
-        <input type="number" class="form-control" id="clientBalance" placeholder="ex : 5000" required
-               [(ngModel)]="client['clientBalance']"
-               name="clientBalance">
+      <div class="form-group col-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Balance</mat-label>
+          <input matInput
+                 type="number"
+                 min="1"
+                 id="clientBalance"
+                 required
+                 [(ngModel)]="client.clientBalance"
+                 name="clientBalance">
+        </mat-form-field>
       </div>
-    </div>
-    <div class="form-group">
-      <label>Phone Number</label>
-      <input type="number" class="form-control" id="clientPhone" placeholder="ex : 0791234567" required
-             [(ngModel)]="client['clientPhone']"
-             name="clientPhone">
-    </div>
-    <div class="form-group">
-      <label>Address</label>
-      <input type="text" class="form-control" id="clientAddress" placeholder="ex : Amman" required
-             [(ngModel)]="client['clientAddress']"
-             name="clientAddress">
-    </div>
-    <div class="form-group">
-      <label>Description</label>
-      <input type="text" class="form-control" id="clientDescription" placeholder="ex : super client" required
-             [(ngModel)]="client['clientDescription']"
-             name="clientDescription">
-    </div>
 
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" class="form-control" id="clientPassword" required
-             [(ngModel)]="client['clientPassword']"
-             name="clientPassword">
-    </div>
-
-    <div class="form-group">
-      <label>Image</label>
-      <input type="text" class="form-control" id="clientProfilePic" placeholder="ex : www.site.com/pic.png" required
-             [(ngModel)]="client['clientProfilePic']"
-             name="clientProfilePic">
-    </div>
-
-
-    <button type="button" (click)="onSubmit()" style="width: 100%;" class="btn btn-success">Submit</button>
-    <button type="button" (click)="gotoList()" style="width: 100%; margin-top: 10px;" class="btn btn-primary">Cancel
-    </button>
-    <div [hidden]="!submitted">
-      <h4>You submitted successfully!</h4>
-      <!--   <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+      <div class="form-group col-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Phone Number</mat-label>
+          <span matPrefix>+962 &nbsp;</span>
+          <input type="tel"
+                 matInput
+                 placeholder="79-1234-567"
+                 id="clientPhone"
+                 required
+                 [(ngModel)]="client.clientPhone"
+                 name="clientPhone">
+        </mat-form-field>
+      </div>
+      <div class="form-group col-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Image URL</mat-label>
+          <!--          https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png-->
+          <input matInput
+                 id="clientProfilePic"
+                 required
+                 [(ngModel)]="client.clientProfilePic"
+                 name="clientProfilePic">
+        </mat-form-field>
+      </div>
+      <div class="form-group col-12">
+        <mat-form-field class="example-full-width">
+          <mat-label>Address</mat-label>
+          <input matInput
+                 id="clientAddress"
+                 placeholder="ex : Amman"
+                 required
+                 [(ngModel)]="client.clientAddress"
+                 name="clientAddress">
+        </mat-form-field>
+      </div>
+      <div class="form-group col-12">
+        <mat-form-field class="example-full-width">
+          <mat-label>Description</mat-label>
+          <input matInput
+                 id="clientDescription"
+                 required
+                 [(ngModel)]="client.clientDescription"
+                 name="clientDescription">
+        </mat-form-field>
+      </div>
+      <div class="form-group col-12">
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput
+                 type="password"
+                 id="clientPassword"
+                 required
+                 [(ngModel)]="client.clientPassword"
+                 name="clientPassword">
+        </mat-form-field>
+      </div>
+      <div class="form-group col-12">
+        <div class="row">
+          <div class="col-6 example-full-width">
+            <button
+              type="button"
+              (click)="onSubmit()"
+              class="btn btn-success example-full-width"
+              [disabled]="!myForm.form.valid">
+              Submit
+            </button>
+          </div>
+          <div class="col-6">
+            <button
+              type="button"
+              (click)="gotoList()"
+              class="btn btn-primary example-full-width">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </form>
 </div>
