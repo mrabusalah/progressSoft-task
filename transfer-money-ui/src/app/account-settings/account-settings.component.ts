@@ -11,42 +11,37 @@ import {Router} from '@angular/router';
 })
 export class AccountSettingsComponent implements OnInit {
   client: Account = new Account();
-  default: any;
 
   constructor(private accountService: AccountService, private router: Router) {
+    this.accountService.getClientById(+localStorage.getItem('id')).subscribe(res => {
+      this.client = res;
+    });
   }
 
   ngOnInit(): void {
-    this.default = 'abusalah';
   }
 
   save() {
-    this.accountService.createClient(this.client)
+    this.accountService.updateClient(this.client, this.client.id)
       .subscribe(data => {
+        this.gotoHome();
         Swal.fire({
           icon: 'success',
           title: 'Done...',
-          text: 'Client added successfully!',
+          text: 'Client Updated successfully!',
         });
-        console.log(data);
-        this.gotoHome();
       }, error => {
         Swal.fire({
           icon: 'error',
           title: 'Opps...',
-          text: 'There is an issue with adding Client!',
+          text: 'There is an issue with updating Client information!',
         });
         console.log(error);
       });
     this.client = new Account();
   }
 
-  onSubmit() {
-    this.save();
-  }
-
-
   gotoHome() {
-    this.router.navigate(['']);
+    this.router.navigate(['/profile', localStorage.getItem('username')]);
   }
 }

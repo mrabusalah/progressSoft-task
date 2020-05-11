@@ -29,7 +29,7 @@ import {NotFound404Component} from './not-found404/not-found404.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {NgwWowModule} from 'ngx-wow';
-import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import {AccountSettingsComponent} from './account-settings/account-settings.component';
 
 @NgModule({
   declarations: [

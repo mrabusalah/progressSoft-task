@@ -49,7 +49,7 @@ public class AccountService {
 
     public Account updateExistAccount(Long id, Account account) {
         if (accountRepository.existsById(id)) {
-
+            account.setClientPassword(new BCryptPasswordEncoder().encode(account.getClientPassword()));
             return accountRepository.save(account);
         }
         throw new NullPointerException("Id not found");
