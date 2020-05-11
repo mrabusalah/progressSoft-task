@@ -1,10 +1,10 @@
 <header class="bg-info text-center py-5 mb-4" style="border-radius: 10px;">
   <div class="container">
-    <h1 class="font-weight-light text-white">Create Account</h1>
+    <h1 class="font-weight-light text-white">Update Account</h1>
   </div>
 </header>
 <div class="container form">
-  <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+  <form (ngSubmit)="save()" #myForm="ngForm">
     <div class="row">
       <div class="form-group col-12">
         <mat-form-field appearance="outline" class="example-full-width">
@@ -16,29 +16,6 @@
                  name="clientName">
         </mat-form-field>
       </div>
-      <div class="form-group col-6">
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>Username</mat-label>
-          <input matInput
-                 id="clientUsername"
-                 required
-                 [(ngModel)]="client.clientUsername"
-                 name="clientUsername">
-        </mat-form-field>
-      </div>
-      <div class="form-group col-6">
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>Balance</mat-label>
-          <input matInput
-                 type="number"
-                 min="1"
-                 id="clientBalance"
-                 required
-                 [(ngModel)]="client.clientBalance"
-                 name="clientBalance">
-        </mat-form-field>
-      </div>
-
       <div class="form-group col-6">
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-label>Phone Number</mat-label>
@@ -65,8 +42,8 @@
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-label>Address</mat-label>
           <input matInput
-                 id="clientAddress"
                  placeholder="ex : Amman"
+                 id="clientAddress"
                  required
                  [(ngModel)]="client.clientAddress"
                  name="clientAddress">
@@ -98,7 +75,7 @@
           <div class="col-6 example-full-width">
             <button
               type="button"
-              (click)="onSubmit()"
+              (click)="save()"
               class="btn btn-success example-full-width"
               [disabled]="!myForm.form.valid">
               Submit
@@ -107,7 +84,7 @@
           <div class="col-6">
             <button
               type="button"
-              (click)="gotoList()"
+              (click)="gotoHome()"
               class="btn btn-primary example-full-width">
               Cancel
             </button>

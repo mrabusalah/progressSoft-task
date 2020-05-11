@@ -12,7 +12,6 @@ export class TokenInterceptorService implements HttpInterceptor {
     if (this.accountService.loggedIn()) {
       const authReq = req.clone({
         headers: new HttpHeaders({
-          'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: `Basic ` + btoa('app' + ':' + 'passApp')
         })
       });

@@ -5,49 +5,43 @@ import {AccountService} from '../services/account.service';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-create-client',
-  templateUrl: './create-client.component.html',
-  styleUrls: ['./create-client.component.css']
+  selector: 'app-account-settings',
+  templateUrl: './account-settings.component.html',
+  styleUrls: ['./account-settings.component.css']
 })
-export class CreateClientComponent implements OnInit {
-
+export class AccountSettingsComponent implements OnInit {
   client: Account = new Account();
-  submitted = false;
 
   constructor(private accountService: AccountService, private router: Router) {
+    this.accountService.getClientById(+localStorage.getItem('id')).subscribe(res => {
+      this.client = res;
+    });
   }
 
   ngOnInit(): void {
   }
 
   save() {
-    this.accountService.createClient(this.client)
+    this.accountService.updateClient(this.client, this.client.id)
       .subscribe(data => {
+        this.gotoHome();
         Swal.fire({
           icon: 'success',
           title: 'Done...',
-          text: 'Client added successfully!',
+          text: 'Client Updated successfully!',
         });
-        console.log(data);
-        this.gotoList();
       }, error => {
         Swal.fire({
           icon: 'error',
           title: 'Opps...',
-          text: 'There is an issue with adding Client!',
+          text: 'There is an issue with updating Client information!',
         });
         console.log(error);
       });
     this.client = new Account();
   }
 
-  onSubmit() {
-    this.submitted = true;
-    this.save();
+  gotoHome() {
+    this.router.navigate(['/profile', localStorage.getItem('username')]);
   }
-
-  gotoList() {
-    this.router.navigate(['']);
-  }
-
 }

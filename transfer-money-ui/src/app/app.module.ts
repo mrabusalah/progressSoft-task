@@ -20,14 +20,16 @@ import {TransactionsListComponent} from './transactions-list/transactions-list.c
 import {TokenInterceptorService} from './services/token-interceptor.service';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {MatTableModule} from "@angular/material/table";
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatSortModule} from "@angular/material/sort";
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSortModule} from '@angular/material/sort';
 import {NotFound404Component} from './not-found404/not-found404.component';
-import {MatCardModule} from "@angular/material/card";
-import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {NgwWowModule} from 'ngx-wow';
+import {AccountSettingsComponent} from './account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import {MatButtonModule} from "@angular/material/button";
     HomeComponent,
     ClientListComponent,
     TransactionsListComponent,
-    NotFound404Component
+    NotFound404Component,
+    AccountSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,7 @@ import {MatButtonModule} from "@angular/material/button";
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    // MaterialModule,
+    NgwWowModule,
     MatPaginatorModule,
     NgbModule,
     MatTableModule,

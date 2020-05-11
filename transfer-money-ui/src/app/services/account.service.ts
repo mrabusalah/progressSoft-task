@@ -41,6 +41,10 @@ export class AccountService {
     return this.http.post(`${this.baseUrl}/clients/create-client`, client);
   }
 
+  updateClient(client: Account, id: number): Observable<object> {
+    return this.http.put(`${this.baseUrl}/clients/update-client/${id}`, client);
+  }
+
   getClientByUsername(username: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/profile/${username}`);
   }

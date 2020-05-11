@@ -40,11 +40,16 @@ public class AccountService {
     public Account saveNewAccount(Account account) {
         account.setClientPassword(new BCryptPasswordEncoder().encode(account.getClientPassword()));
         account.setClientBalance(Double.parseDouble(new DecimalFormat("#.000").format(account.getClientBalance())));
+        account.setClientProfilePic(
+                account.getClientProfilePic() == null ?
+                        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                        : account.getClientProfilePic());
         return accountRepository.save(account);
     }
 
     public Account updateExistAccount(Long id, Account account) {
         if (accountRepository.existsById(id)) {
+            account.setClientPassword(new BCryptPasswordEncoder().encode(account.getClientPassword()));
             return accountRepository.save(account);
         }
         throw new NullPointerException("Id not found");

@@ -1,7 +1,7 @@
 package com.mytask.transfermoney.controlles;
 
-import com.mytask.transfermoney.services.AccountService;
 import com.mytask.transfermoney.module.Account;
+import com.mytask.transfermoney.services.AccountService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,14 +37,12 @@ public class AccountController {
 
     @PostMapping("/clients/create-client")
     public Account saveNewAccount(@Valid @RequestBody Account account) {
-        account.setClientPassword(new BCryptPasswordEncoder().encode(account.getClientPassword()));
         return accountService.saveNewAccount(account);
     }
 
 
     @PutMapping("/clients/update-client/{id}")
     public Account updateExistAccount(@PathVariable Long id, @Valid @RequestBody Account account) {
-        account.setClientPassword(new BCryptPasswordEncoder().encode(account.getClientPassword()));
         return accountService.updateExistAccount(id, account);
     }
 
@@ -54,8 +52,7 @@ public class AccountController {
     }
 
     @PostMapping("/transfer/{sender}/{receiver}/{amount}")
-    public void transferMoney(@PathVariable Long sender, @PathVariable Long receiver, @PathVariable Double amount, @RequestBody String amountBody) {
+    public void transferMoney(@PathVariable Long sender, @PathVariable Long receiver, @PathVariable Double amount) {
         accountService.transferMoney(sender, receiver, amount);
     }
-
 }
