@@ -30,6 +30,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {NgwWowModule} from 'ngx-wow';
 import {AccountSettingsComponent} from './account-settings/account-settings.component';
+import {ConvertCurrencyComponent} from './convert-currency/convert-currency.component';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import {AccountSettingsComponent} from './account-settings/account-settings.comp
     ClientListComponent,
     TransactionsListComponent,
     NotFound404Component,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    ConvertCurrencyComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,9 @@ import {AccountSettingsComponent} from './account-settings/account-settings.comp
     MatInputModule,
     MatSortModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxMatSelectSearchModule,
+    MatSelectModule
   ],
   providers: [HttpClient,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}

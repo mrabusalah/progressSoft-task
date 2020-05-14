@@ -11,6 +11,7 @@ import {ClientListComponent} from './client-list/client-list.component';
 import {TransactionsListComponent} from './transactions-list/transactions-list.component';
 import {NotFound404Component} from './not-found404/not-found404.component';
 import {AccountSettingsComponent} from './account-settings/account-settings.component';
+import {ConvertCurrencyComponent} from './convert-currency/convert-currency.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'transactions-list', component: TransactionsListComponent, canActivate: [UserAuthGuard]},
   {path: 'home', component: HomeComponent, canActivate: [UserAuthGuard]},
   {path: 'settings', component: AccountSettingsComponent, canActivate: [UserAuthGuard]},
+  {path: 'converter', component: ConvertCurrencyComponent},
   {path: '**', pathMatch: 'full', redirectTo: '/404'},
   {path: '404', component: NotFound404Component}
 
