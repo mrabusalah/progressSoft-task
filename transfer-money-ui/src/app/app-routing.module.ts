@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'clients', component: ClientPanelComponent, canActivate: [UserAuthGuard]},
   {path: 'clients-list', component: ClientListComponent, canActivate: [UserAuthGuard]},
   {path: 'transactions-list', component: TransactionsListComponent, canActivate: [UserAuthGuard]},
-  {path: 'home', component: HomeComponent, canActivate: [UserAuthGuard]},
+  {path: 'home', component: HomeComponent},
   {path: 'settings', component: AccountSettingsComponent, canActivate: [UserAuthGuard]},
   {path: 'converter', component: ConvertCurrencyComponent},
   {path: '**', pathMatch: 'full', redirectTo: '/404'},

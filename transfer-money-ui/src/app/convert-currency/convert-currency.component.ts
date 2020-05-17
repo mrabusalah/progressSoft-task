@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {CurrencyService} from '../services/currency.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-convert-currency',
@@ -187,8 +188,30 @@ export class ConvertCurrencyComponent {
     'ZMW - Zambian Kwacha',
     'ZWL - Zimbabwean Dolla'
   ];
+  result: any;
+  amount = 1;
 
   convert(selected: string, selected1: string) {
-
+    this.currencyService.getCurrencyList(selected, selected1, this.amount).subscribe(res => {
+      Swal.fire({
+        title: 'The Result :<br>' + res + ' ' + selected1.substring(0, 3),
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
+      this.result = res;
+    }, error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        showCloseButton: true,
+        footer: '<a href>Why do I have this issue?</a>'
+      });
+      console.log(error);
+    });
   }
 }

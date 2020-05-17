@@ -9,7 +9,7 @@
       <div class="col-2 input amount-input">
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-label class="text-light">Enter Amount</mat-label>
-          <input matInput class="text-light" type="number" min="1" placeholder="Amount" value="1">
+          <input matInput [(ngModel)]="amount" class="text-light" type="number" min="1" placeholder="Amount">
         </mat-form-field>
       </div>
       <div class="col-5 input">
@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="text-center convert">
-      <button (click)="convert(selected , selected1)"
+      <button (click)="convert(selected.substring(0,3) , selected1.substring(0,3))"
               class="btn btn-info convert-btn">
         <i class="fas fa-location-arrow"></i>
       </button>
@@ -46,4 +46,3 @@
     </div>
   </div>
 </div>
-<p>you will convert from : {{selected}} , to {{selected1}}</p>

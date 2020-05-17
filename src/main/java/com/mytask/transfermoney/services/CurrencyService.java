@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CurrencyService {
 
-    public Double exchangeMoney(String from, String to) {
+    public Double exchangeMoney(String from, String to, Double amount) {
         Currency currency = new Currency();
-        return currency.getRate(from, to);
+        return currency.getRate(from, to) * amount;
     }
 }
