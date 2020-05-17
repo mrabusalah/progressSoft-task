@@ -1,7 +1,9 @@
 <div class="bg-info">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-info">
-      <a class="navbar-brand text-light" href="#">{{title}}</a>
+      <a class="navbar-brand text-light" href="#">
+        <img src="assets/images/logo_transparent.png" alt="Transfer Money" style="width: 150px">
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -24,7 +26,7 @@
           <li class="nav-item" *ngIf="(accountService.loggedIn())">
             <a class="nav-link text-light" href="/transactions-list"
                routerLinkActive="active">
-              <i class="fas fa-money-bill-wave"></i>
+              <i class="fas fa-list"></i>
               <span class="d-none d-lg-block">transactions</span>
             </a>
           </li>

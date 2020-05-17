@@ -43,51 +43,59 @@ export class ClientPanelComponent implements OnInit {
     }
 
     transferMoney(id: number, amount: number) {
-        this.accountService.transferMoney(this.currentClient.id, id, this.amount)
-            .subscribe(res => {
-                let timerInterval;
-                Swal.fire({
-                    title: 'wait until finishing the process !',
-                    html: 'I will close in <b></b> milliseconds.',
-                    timer: 2000,
-                    timerProgressBar: true,
-                    onBeforeOpen: () => {
-                        Swal.showLoading();
-                        timerInterval = setInterval(() => {
-                            const content = Swal.getContent();
-                            if (content) {
-                                const b = content.querySelector('b');
-                                if (b) {
-                                    b.textContent = String(Swal.getTimerLeft());
+        if (id === this.currentClient.id) {
+            Swal.fire(
+                'Cancelled',
+                'You cannot transfer money for your self',
+                'error'
+            );
+        } else {
+            this.accountService.transferMoney(this.currentClient.id, id, this.amount)
+                .subscribe(res => {
+                    let timerInterval;
+                    Swal.fire({
+                        title: 'wait until finishing the process !',
+                        html: 'I will close in <b></b> milliseconds.',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        onBeforeOpen: () => {
+                            Swal.showLoading();
+                            timerInterval = setInterval(() => {
+                                const content = Swal.getContent();
+                                if (content) {
+                                    const b = content.querySelector('b');
+                                    if (b) {
+                                        b.textContent = String(Swal.getTimerLeft());
+                                    }
                                 }
+                            }, 100);
+                        },
+                        onClose: () => {
+                            clearInterval(timerInterval);
+                            {
+                                Swal.fire(
+                                    'Converted!',
+                                    'Your Money has been converted.',
+                                    'success'
+                                );
                             }
-                        }, 100);
-                    },
-                    onClose: () => {
-                        clearInterval(timerInterval);
-                        {
-                            Swal.fire(
-                                'Converted!',
-                                'Your Money has been converted.',
-                                'success'
-                            );
                         }
-                    }
-                });
-                // save the operation in the history of transactions
-                this.transactionService.addNewTransaction(this.currentClient.id, id, amount).subscribe(req => {
-                    console.log(req);
+                    });
+                    // save the operation in the history of transactions
+                    this.transactionService.addNewTransaction(this.currentClient.id, id, amount).subscribe(req => {
+                        console.log(req);
+                    }, error => {
+                        console.log(error);
+                    });
                 }, error => {
                     console.log(error);
+                    Swal.fire(
+                        'Cancelled',
+                        'Error while transfer money :(',
+                        'error'
+                    );
                 });
-            }, error => {
-                console.log(error);
-                Swal.fire(
-                    'Cancelled',
-                    'Error while transfer money :(',
-                    'error'
-                );
-            });
+        }
     }
 
 
