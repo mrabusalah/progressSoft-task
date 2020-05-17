@@ -1,0 +1,331 @@
+//
+// Popovers
+// --------------------------------------------------
+@popover-padding-vertical: 18px;
+@popover-padding-horizontal: 24px;
+
+.popover {
+  top: 0;
+  left: 0;
+  z-index: @zindex-popover;
+  width: @popover-max-width;
+  padding: @popover-padding-vertical @popover-padding-horizontal;
+  // Our parent element can be arbitrary since popovers are by default inserted as a sibling of their target element.
+  // So reset our font and text properties to avoid inheriting weird values.
+  .reset-text();
+  font-size: @font-size-small;
+
+  background-color: @popover-bg;
+  background-clip: padding-box;
+  border: 1px solid @popover-fallback-border-color;
+  border: 1px solid @popover-border-color;
+  border-radius: @border-radius-large;
+  .box-shadow(0px 20px 66px 0px rgba(34, 48, 73, 0.2));
+
+  position: absolute;
+
+  &.animate {
+    transition: transform 0.25s;
+  }
+  &.scale-down {
+    transform: scale(0);
+  }
+
+  // Offset the popover to account for the popover arrow
+  &.top {
+    margin-top: -@popover-arrow-width;
+    transform-origin: 50% 100%;
+  }
+  &.top-left {
+    margin-top: -@popover-arrow-width;
+    transform-origin: calc(100% - 29px) 100%;
+  }
+  &.top-right {
+    margin-top: -@popover-arrow-width;
+    transform-origin: 29px 100%;
+  }
+  &.right {
+    margin-left: @popover-arrow-width;
+    transform-origin: 0% 50%;
+  }
+  &.right-top {
+    margin-left: @popover-arrow-width;
+    transform-origin: 0% 29px;
+  }
+  &.right-bottom {
+    margin-left: @popover-arrow-width;
+    transform-origin: 0% calc(100% - 29px);
+  }
+  &.bottom {
+    margin-top: @popover-arrow-width;
+    transform-origin: 50% 0%;
+  }
+  &.bottom-left {
+    margin-top: @popover-arrow-width;
+    transform-origin: calc(100% - 29px) 0%;
+  }
+  &.bottom-right {
+    margin-top: @popover-arrow-width;
+    transform-origin: 29px 0%;
+  }
+  &.left {
+    margin-left: -@popover-arrow-width;
+    transform-origin: 100% 50%;
+  }
+  &.left-top {
+    margin-left: -@popover-arrow-width;
+    transform-origin: 100% 29px;
+  }
+  &.left-bottom {
+    margin-left: -@popover-arrow-width;
+    transform-origin: 100% calc(100% - 29px);
+  }
+
+  .arrow-pointer(@popover-arrow-width);
+
+  &.top:before {
+    top: auto;
+    bottom: (@popover-arrow-width / -2);
+    left: 50%;
+    margin-left: (@popover-arrow-width / -2);
+  }
+  &.top-left:before {
+    top: auto;
+    bottom: (@popover-arrow-width / -2);
+    right: 29px;
+    left: auto;
+    margin-left: (@popover-arrow-width / -2);
+  }
+  &.top-right:before {
+    top: auto;
+    bottom: (@popover-arrow-width / -2);
+    left: 29px;
+    right: auto;
+    margin-left: (@popover-arrow-width / -2);
+  }
+  &.right:before {
+    top: 50%;
+    margin-top: (@popover-arrow-width / -2);
+    left: (@popover-arrow-width / -2);
+  }
+  &.right-top:before {
+    top: 29px;
+    margin-top: (@popover-arrow-width / -2);
+    left: (@popover-arrow-width / -2);
+  }
+  &.right-bottom:before {
+    top: calc(100% - 29px);
+    margin-top: (@popover-arrow-width / -2);
+    left: (@popover-arrow-width / -2);
+  }
+  &.bottom:before {
+    top: (@popover-arrow-width / -2);
+    bottom: auto;
+    left: 50%;
+    margin-left: (@popover-arrow-width / -2);
+  }
+  &.bottom-left:before {
+    top: (@popover-arrow-width / -2);
+    bottom: auto;
+    right: 29px;
+    left: auto;
+    margin-left: (@popover-arrow-width / -2);
+  }
+  &.bottom-right:before {
+    top: (@popover-arrow-width / -2);
+    bottom: auto;
+    left: 29px;
+    right: auto;
+    margin-left: (@popover-arrow-width / -2);
+  }
+  &.left:before {
+    top: 50%;
+    margin-top: (@popover-arrow-width / -2);
+    left: auto;
+    right: (@popover-arrow-width / -2);
+  }
+  &.left-top:before {
+    top: 29px;
+    margin-top: (@popover-arrow-width / -2);
+    left: auto;
+    right: (@popover-arrow-width / -2);
+  }
+  &.left-bottom:before {
+    top: calc(100% - 29px);
+    margin-top: (@popover-arrow-width / -2);
+    left: auto;
+    right: (@popover-arrow-width / -2);
+  }
+
+  img,
+  .popover-image {
+    width: 65%;
+    margin: 8px 0;
+  }
+}
+
+.popover-title {
+  margin: 0; // reset heading margin
+  padding: 0;
+  font-size: @font-size-small;
+  background-color: @popover-title-bg;
+  border-bottom: 0;
+  border-radius: (@border-radius-large - 1) (@border-radius-large - 1) 0 0;
+  color: @headings-color !important;
+  line-height: 24px;
+}
+
+.popover-content {
+  padding: 0;
+  color: @brand-grey-plus-20;
+  font-size: @font-size-small;
+  line-height: 24px;
+}
+
+.popover-content > :last-child {
+  margin-bottom: 0;
+}
+
+.popover-close {
+  .close();
+}
+
+[data-toggle='popover'] {
+  &:not(.btn) {
+    color: inherit !important;
+    font-weight: inherit !important;
+    text-decoration: none !important;
+    border-bottom: 1px dotted @abbr-border-color !important;
+    cursor: pointer;
+    &:hover,
+    &:focus,
+    &[aria-describedby] {
+      color: @link-hover-color !important;
+      outline: 0;
+    }
+  }
+  .nav > li > a & {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: @screen-md-max) {
+  .popover-modal {
+    position: fixed;
+    top: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    width: 272px;
+    margin: 32px auto !important;
+  }
+  .popover-modal:before {
+    display: none;
+  }
+}
+@media (min-width: @screen-lg-min) {
+  .popover-modal.left {
+    margin-right: -24px !important;
+  }
+  .popover-modal.right {
+    margin-left: -24px !important;
+  }
+  .popover-modal.top {
+    margin-bottom: -8px !important;
+  }
+  .popover-modal.bottom {
+    margin-top: -8px !important;
+  }
+}
+
+@keyframes cover-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.7;
+  }
+}
+
+.popover-modal-cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1060;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  cursor: pointer;
+  background-color: @brand-navy-minus-20;
+  opacity: 0.7;
+  animation: cover-fade-in 0.35s 0s linear forwards;
+}
+@media (max-width: @screen-md-max) {
+  .popover-modal-cover {
+    display: block;
+  }
+}
+
+.popover-promotion {
+  text-align: center;
+  padding: 24px;
+
+  @media (max-width: @screen-sm-min) {
+    width: auto !important;
+
+    padding: 24px !important;
+    margin: 16px !important;
+  }
+
+  @media (min-width: (@screen-sm-min - 10px)) and (max-width: @screen-lg-min) {
+    width: 540px !important;
+
+    padding: 28px 32px !important;
+    margin: 32px auto !important;
+  }
+
+  .popover-title {
+    font-size: @font-size-h4;
+    line-height: @line-height-h4;
+
+    @media (min-width: @screen-md-min) {
+      font-size: @font-size-h3;
+      line-height: @line-height-h3;
+    }
+  }
+
+  .popover-image {
+    @media (max-width: @screen-xs-min) {
+      width: 80%;
+    }
+
+    @media (min-width: @screen-xs-min) and (max-width: @screen-lg-min) {
+      width: 60%;
+    }
+
+    @media (min-width: @screen-lg-min) {
+      width: 80%;
+    }
+  }
+}
+
+@media (max-width: @screen-lg-min) {
+  .popover-promotion {
+    position: absolute !important;
+  }
+}
+
+/**
+ * Note: Repeated occurrances [sic] of the same simple selector are allowed and
+ * do increase specificity.
+ *
+ * Safely raising specificity to 0020
+ *
+ * https://www.w3.org/TR/css3-selectors/#specificity
+ */
+.promoted.promoted {
+  .button-variant(
+    @btn-primary-color; #FFF; @btn-primary-bg; @btn-primary-bg-hover;
+      @btn-primary-bg-active; @btn-primary-border; @btn-primary-border-hover;
+      @btn-primary-border-active
+  );
+}

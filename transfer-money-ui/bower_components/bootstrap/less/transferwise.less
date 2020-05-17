@@ -1,0 +1,166 @@
+.bg-default {
+  background-color: @gray-base;
+}
+
+.bg-info .btn-default {
+  border-color: @brand-white;
+  background-color: @brand-white;
+
+  &:hover {
+    border-color: @brand-smoke-plus-20;
+    background-color: @brand-smoke-plus-20;
+    color: @brand-light-blue;
+  }
+  &:active {
+    border-color: @brand-smoke-plus-10;
+    background-color: @brand-smoke-plus-10;
+    color: @brand-light-blue;
+  }
+}
+
+.nav,
+.navbar,
+.pager,
+.dropdown-menu {
+  a {
+    text-decoration: none;
+  }
+}
+a.btn {
+  text-decoration: none;
+}
+
+address {
+  margin-bottom: 16px;
+}
+
+blockquote footer {
+  background-color: transparent;
+}
+
+.well,
+.form-control,
+.btn:active,
+.btn.active {
+  box-shadow: none;
+}
+
+.btn-default[disabled] .glyphicon {
+  color: @gray-light;
+}
+
+.bg-info a:not(.btn) {
+  color: @brand-white;
+
+  &:hover,
+  &:focus {
+    color: @brand-smoke-plus-20;
+  }
+
+  &:active {
+    color: @brand-smoke-plus-10;
+  }
+}
+
+.badge {
+  top: -1px;
+  position: relative;
+}
+
+.list-group-item > .badge {
+  top: 0;
+}
+
+.modal-content {
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.dropdown-menu > li:not(.dropdown-header) {
+  padding-left: 0;
+}
+.nav > .navbar-icon > a {
+  padding-bottom: 8px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+li,
+li > a {
+  > .glyphicon:first-child,
+  > .icon:first-child,
+  > .currency-flag:first-child,
+  > .circle:first-child {
+    margin-right: 8px;
+  }
+}
+.btn {
+  .glyphicon:first-child,
+  .icon:first-child,
+  .currency-flag:first-child,
+  .circle:first-child {
+    margin-right: 8px;
+  }
+}
+
+li .circle {
+  display: inline-block;
+  vertical-align: bottom;
+}
+.btn .circle .icon,
+.dropdown-menu li .circle .icon {
+  float: none;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.tw-select-transcluded a {
+  color: @link-color !important;
+  text-decoration: none;
+}
+.tw-select-filter {
+  border: 0;
+}
+.tw-select-filter-link:hover,
+.tw-select-filter-link:active {
+  background-color: @brand-white !important;
+}
+
+// We need this because the back icon is not flush to it's bounding box.
+// Would like to find a better solution, but no negative margin utilities atm.
+.tw-card-back {
+  margin-left: -8px;
+}
+
+.tw-rate-lock-link {
+  color: @brand-smoke-minus-10;
+  &:hover,
+  &:focus,
+  &:active {
+    color: @brand-smoke-minus-20;
+  }
+}
+
+.link-callout::after {
+    content: "\e080";
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    font-size: 10px;
+    margin-left: 8px;
+    transition: transform 0.2s ease-in-out;
+    transform: none;
+    pointer-events: none;
+    color: @link-color;
+}
+
+.link-callout:hover::after,
+.link-callout:focus::after,
+.callout-container:hover .link-callout::after,
+.callout-container:focus .link-callout::after {
+  transform: translateX(4px);
+}

@@ -1,17 +1,19 @@
 package com.mytask.transfermoney;
 
+import com.mytask.transfermoney.module.Currency;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import java.io.IOException;
 
 @SpringBootApplication
 @EnableSwagger2
 
 public class TransferMoneyApplication {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication.run(TransferMoneyApplication.class, args);
+
+        Currency currency = new Currency();
+        System.out.println(currency.getRate("JOD", "USD"));
     }
 }

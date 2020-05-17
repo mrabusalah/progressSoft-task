@@ -1,0 +1,145 @@
+
+
+.column-layout {
+  width: 100%;
+}
+.column-layout-left,
+.column-layout-right {
+  position: fixed;
+  width: @column-width;
+  vertical-align: top;
+  height: 100%;
+  z-index: 3;
+  transition: transform ease 0.5s;
+  top: 0;
+}
+
+.column-layout-left {
+  transform: translateX(-@column-width);
+}
+.column-layout-right {
+  right: 0;
+  transform: translateX(@column-width);
+}
+.column-layout-left.open,
+.column-layout-right.open {
+  transform: translateX(0);
+}
+.column-layout-main {
+  width: 100%;
+}
+.column-layout-top {
+  position: fixed;
+  top: 0;
+  width: @column-width;
+  max-height: 100vh;
+  overflow-y: auto;
+  backface-visibility: hidden;
+}
+.column-layout-bottom {
+  position: fixed;
+  bottom: 0;
+  width: @column-width;
+  padding: 24px;
+}
+@media (min-width: @screen-lg-min) {
+  .column-layout {
+    display: table;
+  }
+  .column-layout-left,
+  .column-layout-right {
+    position: relative;
+    display: table-cell;
+    transform: none;
+  }
+  .column-layout-main {
+    display: table-cell;
+    vertical-align: top;
+    width: auto;
+  }
+}
+.column-layout-cover.in {
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+}
+.column-layout-cover .close {
+  position: absolute;
+  left: (@column-width + 20px);
+  top: -1000px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  transition-delay: 0.35s;
+  text-decoration: none;
+}
+.column-layout-cover.in .close {
+  opacity: 1;
+  top: 20px;
+}
+
+@media (min-width: @screen-lg-min) {
+  .column-layout-cover {
+    display: none;
+  }
+}
+@media (max-width: @screen-md-max) {
+  // apply to body to prevent background scrolling
+  .column-layout-open {
+    overflow: hidden;
+  }
+  .column-layout-cover {
+    position: fixed;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background-color: @brand-navy-minus-20;
+    cursor: pointer;
+    z-index: @zindex-mobile-nav-background;
+  }
+  .column-layout-left,
+  .column-layout-right {
+    z-index: @zindex-mobile-nav;
+  }
+}
+
+
+.column-layout-left,
+.column-layout-right {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.column-layout-main .container {
+  // ensures we use the full width on default mac screen
+  max-width: 1176px;
+  margin-left: 0;
+}
+
+.column-layout-brand {
+  padding: 4px @spacing-1-tablet;
+}
+@media (min-width: @screen-lg-min) {
+  .column-layout-brand {
+    padding-left: @spacing-1-desktop;
+    padding-right: @spacing-1-desktop;
+  }
+}
+
+body > .column-layout {
+  min-height: 100vh;
+  height: 100vh;
+}
+
+.column-layout-left .column-layout-top {
+  background-position: 0 40px;
+  background-repeat: no-repeat;
+  background-size: @column-width auto;
+  height: 100vh;
+  @media (min-height: 596px) {
+    background-position: left bottom;
+  }
+}

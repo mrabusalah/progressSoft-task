@@ -1,0 +1,49 @@
+.currency-converter {
+  height: auto;
+  background-image: url("https://www.azernews.az/media/2019/05/26/dollar_euro_yen_310518.jpg");
+}
+
+mat-select {
+  color: #fff;
+}
+
+.example-full-width {
+  width: 100%;
+  border-color: #fff;
+}
+
+.input-line {
+  padding: 150px 20px 0 20px;
+  background-color: #28a74599;
+}
+
+.inputs {
+  background-color: #fff;
+  border-radius: 20px 0;
+}
+
+.amount-input {
+  background-color: #17a2b8;
+  border-radius: 20px 0;
+}
+
+.input {
+  padding-top: 1.34375em;
+}
+
+.convert {
+  margin-top: 30px;
+  padding-bottom: 30px;
+}
+
+.convert h1 {
+  text-transform: uppercase;
+  font-weight: lighter;
+}
+
+.convert-btn {
+  font-size: 50px;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}

@@ -1,0 +1,40 @@
+//
+// Wells
+// --------------------------------------------------
+
+// Base class / mixin
+.well() {
+  min-height: 24px;
+  margin-bottom: 24px;
+  border-radius: @border-radius-base;
+
+  border: solid 1px @brand-smoke-plus-10;
+  padding: 24px;
+}
+
+.sized-well(@size) {
+  @media only screen and (min-width: @size) {
+    .well();
+  }
+}
+
+// Sizes
+.well, .well-xs {
+  .well();
+}
+
+.well-sm {
+  .sized-well(@screen-sm-min);
+}
+
+.well-md {
+  .sized-well(@screen-md-min);
+}
+
+.well-lg {
+  .sized-well(@screen-lg-min);
+}
+
+.well-xl {
+  .sized-well(@screen-xl-min);
+}

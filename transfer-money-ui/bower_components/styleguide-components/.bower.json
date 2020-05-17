@@ -1,0 +1,14 @@
+{
+  "name": "styleguide-components",
+  "homepage": "https://github.com/transferwise/styleguide-components",
+  "version": "5.6.1",
+  "_release": "5.6.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v5.6.1",
+    "commit": "96889d6ef9c456b6462c77123075ce2c4f8b04f6"
+  },
+  "_source": "https://github.com/transferwise/styleguide-components.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/transferwise/styleguide-components.git"
+}

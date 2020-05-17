@@ -1,3 +1,12 @@
+<div class="alert alert-info alert-dismissible fade show text-center myNotify" role="alert">
+  <strong><i class="fas fa-money-bill-alt"></i></strong>
+  <a href="/converter"> Try our new SMART currency converter ! </a>
+  <strong><i class="fas fa-money-bill-alt"></i></strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
 <div class="header-image">
   <img src="../../assets/images/header-img.png"
        alt="header-image">
@@ -16,13 +25,13 @@
   </div>
   <div class="buttons">
     <div class="row">
-      <div class="col-lg-4 col-sm-12">
+      <div class="col-lg-4 col-sm-12" (click)="steps('Register')">
         <label class="btn btn1">step 1</label>
       </div>
-      <div class="col-lg-4 col-sm-12">
+      <div class="col-lg-4 col-sm-12" (click)="steps('Login')">
         <label class="btn btn2">step 2</label>
       </div>
-      <div class="col-lg-4 col-sm-12">
+      <div class="col-lg-4 col-sm-12" (click)="steps('Transfer')">
         <label class="btn btn3">step 3</label>
       </div>
 

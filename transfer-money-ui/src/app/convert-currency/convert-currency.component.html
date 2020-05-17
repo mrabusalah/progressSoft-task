@@ -1,0 +1,48 @@
+<header class="bg-info text-center py-5 mb-4" style="border-radius: 10px;">
+  <div class="container">
+    <h1 class="font-weight-light text-white">PS Currency Converter</h1>
+  </div>
+</header>
+<div class="currency-converter">
+  <div class="input-line">
+    <div class="row inputs">
+      <div class="col-2 input amount-input">
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label class="text-light">Enter Amount</mat-label>
+          <input matInput [(ngModel)]="amount" class="text-light" type="number" min="1" placeholder="Amount">
+        </mat-form-field>
+      </div>
+      <div class="col-5 input">
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>From</mat-label>
+          <mat-select [(value)]="selected">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let code of dataList" value="{{code}}">
+              <img src="https://www.countryflags.io/{{code.substr(0,2)}}/flat/32.png"
+                   alt="country_{{code}}_flag">&nbsp;&nbsp;{{code}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-5 input">
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>To</mat-label>
+          <mat-select [(value)]="selected1">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let code of dataList" value="{{code}}">
+              <img src="https://www.countryflags.io/{{code.substr(0,2)}}/flat/32.png"
+                   alt="country_{{code}}_flag">&nbsp;&nbsp;{{code}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="text-center convert">
+      <button (click)="convert(selected.substring(0,3) , selected1.substring(0,3))"
+              class="btn btn-info convert-btn">
+        <i class="fas fa-location-arrow"></i>
+      </button>
+      <h1 class="text-light">Convert</h1>
+    </div>
+  </div>
+</div>

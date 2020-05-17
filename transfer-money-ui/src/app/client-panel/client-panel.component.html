@@ -7,7 +7,7 @@
 <div class="container text-center" *ngIf="clients">
   <div class="row">
     <div class="col-lg-4" *ngFor="let client of clients">
-      <div class="mb-4" *ngIf="notME(client)">
+      <div class="mb-4">
         <div class="card border-0 shadow" (click)="openDialog(transferTemplate)" style="cursor:pointer;">
           <mat-card class="example-card">
             <div class="row">
