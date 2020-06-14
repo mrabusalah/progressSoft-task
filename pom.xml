@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <start-class>com.mytask.transfermoney.TransferMoneyApplication</start-class>
     </properties>
 
     <dependencies>
@@ -44,15 +45,16 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <version>2.1.0.RELEASE</version>
-        </dependency>
-
-        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>2.1.0.RELEASE</version>
         </dependency>
 
         <dependency>

@@ -12,8 +12,5 @@ public class TransferMoneyApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TransferMoneyApplication.class, args);
-
-        Currency currency = new Currency();
-        System.out.println(currency.getRate("JOD", "USD"));
     }
 }

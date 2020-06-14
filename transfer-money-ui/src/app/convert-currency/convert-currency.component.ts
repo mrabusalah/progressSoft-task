@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {CurrencyService} from '../services/currency.service';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-convert-currency',
@@ -17,6 +17,8 @@ export class ConvertCurrencyComponent {
 
 
   dataList: string[] = [
+    'JOD - Jordanian Dinar',
+    'USD - United States Dollar',
     'AUD - United Arab Emirates Dirham',
     'AFN - Afghan Afghani',
     'ALL - Albanian Lek',
@@ -89,7 +91,6 @@ export class ConvertCurrencyComponent {
     'ISK - Icelandic Króna',
     'JEP - Jersey Pound',
     'JMD - Jamaican Dollar',
-    'JOD - Jordanian Dinar',
     'JPY - Japanese Yen',
     'KES - Kenyan Shilling',
     'KGS - Kyrgystani Som',
@@ -167,7 +168,6 @@ export class ConvertCurrencyComponent {
     'TZS - Tanzanian Shilling',
     'UAH - Ukrainian Hryvnia',
     'UGX - Ugandan Shilling',
-    'USD - United States Dollar',
     'UYU - Uruguayan Peso',
     'UZS - Uzbekistan Som',
     'VEF - Venezuelan Bolívar Fuerte',

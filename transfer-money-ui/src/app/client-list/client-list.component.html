@@ -16,6 +16,7 @@
       <th scope="col">CLIENT PHONE</th>
       <th scope="col">CLIENT ADDRESS</th>
       <th scope="col">DESCRIPTION</th>
+      <th scope="col">ACTIONS</th>
     </tr>
     </thead>
     <tbody>
@@ -28,6 +29,9 @@
       <td>{{client['clientPhone']}}</td>
       <td>{{client['clientAddress']}}</td>
       <td>{{client['clientDescription']}}</td>
+      <td>
+        <button class="btn btn-outline-danger" (click)="deleteUser(+client['id'])">DELETE</button>
+      </td>
     </tr>
     </tbody>
   </table>
