@@ -15,38 +15,21 @@ export class AppComponent implements OnInit {
   }
 
   onLogout() {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
-      },
-      buttonsStyling: false
-    });
-
-    swalWithBootstrapButtons.fire({
+    Swal.fire({
       title: 'Are you sure?',
       text: 'You won\'t be able to revert this!',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, logout!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Logout!'
     }).then((result) => {
       if (result.value) {
-        swalWithBootstrapButtons.fire(
-          'logged out!',
+        this.accountService.userLogout();
+        Swal.fire(
+          'Logged Out!',
           'Your session has been ended.',
           'success'
-        );
-        this.accountService.userLogout();
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          'Cancelled',
-          'Your session is safe :)',
-          'error'
         );
       }
     });
