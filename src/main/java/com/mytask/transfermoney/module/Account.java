@@ -32,7 +32,14 @@ public class Account implements UserDetails {
     private String clientProfilePic;
 
 
-    public Account(Long id, String clientUsername, String clientPassword, Double clientBalance, String clientName, String clientPhone, String clientAddress, String clientDescription, String clientProfilePic) {
+    public Account(Long id, String clientUsername,
+                   String clientPassword,
+                   Double clientBalance,
+                   String clientName,
+                   String clientPhone,
+                   String clientAddress,
+                   String clientDescription,
+                   String clientProfilePic) {
         this.id = id;
         this.clientUsername = clientUsername;
         this.clientPassword = clientPassword;
