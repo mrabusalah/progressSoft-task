@@ -37,7 +37,7 @@ public class TransactionController {
 
     @GetMapping("/transactions/sender/{id}")
     public List<Transaction> getAllTransactionsBySenderId(@PathVariable Long id) {
-        return transactionService.getAllTransactionsByUserId(id);
+        return transactionService.getAllTransactionsBySenderId(id);
     }
 
     @GetMapping("/transactions/receiver/{id}")
