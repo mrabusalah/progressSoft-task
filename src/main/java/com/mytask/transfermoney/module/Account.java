@@ -7,9 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -20,11 +17,7 @@ public class Account implements UserDetails {
     private Long id;
     private String clientUsername;
     private String clientPassword;
-    @Positive(message = "The client balance must be more than zero")
-    @NotNull(message = "The client balance cannot be empty")
     private Double clientBalance;
-    @NotBlank
-    @NotNull(message = "The client name cannot be empty or null")
     private String clientName;
     private String clientPhone;
     private String clientAddress;
