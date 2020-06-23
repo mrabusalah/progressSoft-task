@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -29,11 +30,22 @@ public class TransactionService {
         return transactionRepository.findAll(pageable);
     }
 
+    //================================Get Transaction By Id================================
+
     public Optional<Transaction> getTransactionById(Long id) {
+        throwIfNullId(id);
+        throwIfInvalidId(id);
+
         return transactionRepository.findById(id);
     }
 
+    //================================Add New Transaction================================
+
     public Transaction addTransaction(Long sender, Long receiver, double amount) {
+        throwIfNullSenderIdOrRecreiverId(sender, receiver);
+        throwIfInvalidSenderIdOrReceiverId(sender, receiver);
+
+        // arrived here in testing 23-06-2020
         Transaction transaction = new Transaction(sender, receiver, amount);
 
         if (accountRepository.existsById(transaction.getSenderId())
@@ -47,13 +59,31 @@ public class TransactionService {
             throw new NullPointerException("id not available");
     }
 
-    public List<Transaction> getAllTransactionsByUserId(Long id) {
+    private void throwIfInvalidSenderIdOrReceiverId(Long sender, Long receiver) {
+        if (!transactionRepository.existsById(sender) || !transactionRepository.existsById(receiver)) {
+            throw new IllegalArgumentException((!transactionRepository.existsById(sender) ? "sender " : "receiver ") + "id is invalid");
+        }
+    }
+
+    private void throwIfNullSenderIdOrRecreiverId(Long sender, Long receiver) {
+        if (Objects.isNull(sender) || Objects.isNull(receiver)) {
+            throw new NullPointerException((Objects.isNull(sender) ? "sender " : "receiver ") + "id is null");
+        }
+    }
+
+    //================================Get Transactions By UserId================================
+
+    public List<Transaction> getAllTransactionsBySenderId(Long id) {
         return transactionRepository.findAllBySenderIdOrderByDateDesc(id);
     }
+
+    //================================Get Transaction By ReceiverId================================
 
     public List<Transaction> getAllTransactionsByReceiverId(Long id) {
         return transactionRepository.findAllByReceiverIdOrderByDateDesc(id);
     }
+
+    //================================Get Transaction By ReceiverId================================
 
     public List<Transaction> getAllTransactionsById(Long id) {
         return transactionRepository.findAllBySenderIdOrReceiverIdOrderByDateDesc(id, id);
@@ -61,5 +91,17 @@ public class TransactionService {
 
     public Page<Transaction> page(Pageable pageable) {
         return transactionRepository.findAll(pageable);
+    }
+
+    private void throwIfNullId(Long id) {
+        if (Objects.isNull(id)) {
+            throw new NullPointerException("id is null");
+        }
+    }
+
+    private void throwIfInvalidId(Long id) {
+        if (!transactionRepository.existsById(id)) {
+            throw new IllegalArgumentException("id not found");
+        }
     }
 }
