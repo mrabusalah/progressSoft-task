@@ -26,6 +26,10 @@ public class TransactionService {
         return transactionRepository.findAll();
     }
 
+    public Page<Transaction> page(Pageable pageable) {
+        return transactionRepository.findAll(pageable);
+    }
+
     public Page<Transaction> getAllTransactionsPage(Pageable pageable) {
         return transactionRepository.findAll(pageable);
     }
@@ -41,57 +45,60 @@ public class TransactionService {
 
     //================================Add New Transaction================================
 
-    public Transaction addTransaction(Long sender, Long receiver, double amount) {
-        throwIfNullSenderIdOrRecreiverId(sender, receiver);
+    public Transaction addTransaction(Long sender, Long receiver, Double amount) {
+        throwIfNullSenderIdOrReceiverId(sender, receiver);
         throwIfInvalidSenderIdOrReceiverId(sender, receiver);
+        throwIfSenderIdAndReceiverIdAreEqual(sender, receiver);
+        throwIfNullAmount(amount);
+        throwIfInvalidAmount(amount);
 
-        // arrived here in testing 23-06-2020
         Transaction transaction = new Transaction(sender, receiver, amount);
-
-        if (accountRepository.existsById(transaction.getSenderId())
-                && accountRepository.existsById(transaction.getReceiverId())) {
-
-            if (!(transaction.getReceiverId().equals(transaction.getSenderId())))
-                return transactionRepository.save(transaction);
-            else
-                throw new NullPointerException("you cannot send money to your self");
-        } else
-            throw new NullPointerException("id not available");
-    }
-
-    private void throwIfInvalidSenderIdOrReceiverId(Long sender, Long receiver) {
-        if (!transactionRepository.existsById(sender) || !transactionRepository.existsById(receiver)) {
-            throw new IllegalArgumentException((!transactionRepository.existsById(sender) ? "sender " : "receiver ") + "id is invalid");
-        }
-    }
-
-    private void throwIfNullSenderIdOrRecreiverId(Long sender, Long receiver) {
-        if (Objects.isNull(sender) || Objects.isNull(receiver)) {
-            throw new NullPointerException((Objects.isNull(sender) ? "sender " : "receiver ") + "id is null");
-        }
+        return transactionRepository.save(transaction);
     }
 
     //================================Get Transactions By UserId================================
 
     public List<Transaction> getAllTransactionsBySenderId(Long id) {
+        throwIfNullSenderId(id);
+        throwIfInvalidSenderId(id);
+
         return transactionRepository.findAllBySenderIdOrderByDateDesc(id);
     }
 
     //================================Get Transaction By ReceiverId================================
 
     public List<Transaction> getAllTransactionsByReceiverId(Long id) {
+        throwIfNullReceiverId(id);
+        throwIfInvalidReceiverId(id);
+
         return transactionRepository.findAllByReceiverIdOrderByDateDesc(id);
     }
 
     //================================Get Transaction By ReceiverId================================
 
     public List<Transaction> getAllTransactionsById(Long id) {
+        throwIfNullId(id);
+        throwIfInvalidId(id);
+
         return transactionRepository.findAllBySenderIdOrReceiverIdOrderByDateDesc(id, id);
     }
 
-    public Page<Transaction> page(Pageable pageable) {
-        return transactionRepository.findAll(pageable);
-    }
+/*  [#]==========================================================================================================
+    [#]
+    [#]              ___           ___                       ___           ___          _____          ___
+    [#]             /__/\         /  /\          ___        /__/\         /  /\        /  /::\        /  /\
+    [#]            |  |::\       /  /:/_        /  /\       \  \:\       /  /::\      /  /:/\:\      /  /:/_
+    [#]            |  |:|:\     /  /:/ /\      /  /:/        \__\:\     /  /:/\:\    /  /:/  \:\    /  /:/ /\
+    [#]          __|__|:|\:\   /  /:/ /:/_    /  /:/     ___ /  /::\   /  /:/  \:\  /__/:/ \__\:|  /  /:/ /::\
+    [#]         /__/::::| \:\ /__/:/ /:/ /\  /  /::\    /__/\  /:/\:\ /__/:/ \__\:\ \  \:\ /  /:/ /__/:/ /:/\:\
+    [#]         \  \:\~~\__\/ \  \:\/:/ /:/ /__/:/\:\   \  \:\/:/__\/ \  \:\ /  /:/  \  \:\  /:/  \  \:\/:/~/:/
+    [#]          \  \:\        \  \::/ /:/  \__\/  \:\   \  \::/       \  \:\  /:/    \  \:\/:/    \  \::/ /:/
+    [#]           \  \:\        \  \:\/:/        \  \:\   \  \:\        \  \:\/:/      \  \::/      \__\/ /:/
+    [#]            \  \:\        \  \::/          \__\/    \  \:\        \  \::/        \__\/         /__/:/
+    [#]             \__\/         \__\/                     \__\/         \__\/                       \__\/
+    [#]
+    [#]========================================================================================================== */
+
 
     private void throwIfNullId(Long id) {
         if (Objects.isNull(id)) {
@@ -102,6 +109,60 @@ public class TransactionService {
     private void throwIfInvalidId(Long id) {
         if (!transactionRepository.existsById(id)) {
             throw new IllegalArgumentException("id not found");
+        }
+    }
+
+    private void throwIfInvalidSenderIdOrReceiverId(Long sender, Long receiver) {
+        if (!transactionRepository.existsById(sender) || !transactionRepository.existsById(receiver)) {
+            throw new IllegalArgumentException((!transactionRepository.existsById(sender) ? "sender " : "receiver ") + "id is invalid");
+        }
+    }
+
+    private void throwIfNullSenderIdOrReceiverId(Long sender, Long receiver) {
+        if (Objects.isNull(sender) || Objects.isNull(receiver)) {
+            throw new NullPointerException((Objects.isNull(sender) ? "sender " : "receiver ") + "id is null");
+        }
+    }
+
+    private void throwIfInvalidAmount(Double amount) {
+        if (amount <= 0d) {
+            throw new IllegalArgumentException("invalid amount");
+        }
+    }
+
+    private void throwIfNullAmount(Double amount) {
+        if (Objects.isNull(amount)) {
+            throw new NullPointerException("amount is null");
+        }
+    }
+
+    private void throwIfSenderIdAndReceiverIdAreEqual(Long sender, Long receiver) {
+        if (sender.equals(receiver)) {
+            throw new IllegalArgumentException("sender id and receiver id are same");
+        }
+    }
+
+    private void throwIfInvalidSenderId(Long id) {
+        if (!transactionRepository.existsById(id)) {
+            throw new IllegalArgumentException("invalid sender id");
+        }
+    }
+
+    private void throwIfNullSenderId(Long id) {
+        if (Objects.isNull(id)) {
+            throw new NullPointerException("sender id is null");
+        }
+    }
+
+    private void throwIfInvalidReceiverId(Long id) {
+        if (!transactionRepository.existsById(id)) {
+            throw new IllegalArgumentException("invalid receiver id");
+        }
+    }
+
+    private void throwIfNullReceiverId(Long id) {
+        if (Objects.isNull(id)) {
+            throw new NullPointerException("receiver id is null");
         }
     }
 }
