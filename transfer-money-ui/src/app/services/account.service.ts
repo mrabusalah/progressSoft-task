@@ -53,6 +53,10 @@ export class AccountService {
     return this.http.post(`${this.baseUrl}/transfer/${sender}/${receiver}/${amount}`, amount);
   }
 
+  updatePassword(id: number, password: string) {
+    return this.http.put(`${this.baseUrl}/change-password/${id}/${password}`, new Account());
+  }
+
   userLogout() {
     this.router.navigate(['/login']);
     return localStorage.clear();

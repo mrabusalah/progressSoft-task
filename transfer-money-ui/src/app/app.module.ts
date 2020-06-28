@@ -32,7 +32,8 @@ import {NgwWowModule} from 'ngx-wow';
 import {AccountSettingsComponent} from './account-settings/account-settings.component';
 import {ConvertCurrencyComponent} from './convert-currency/convert-currency.component';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
-import {MatSelectModule} from "@angular/material/select";
+import {MatSelectModule} from '@angular/material/select';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {MatSelectModule} from "@angular/material/select";
     TransactionsListComponent,
     NotFound404Component,
     AccountSettingsComponent,
-    ConvertCurrencyComponent
+    ConvertCurrencyComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
