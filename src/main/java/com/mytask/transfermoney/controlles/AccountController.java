@@ -2,7 +2,6 @@ package com.mytask.transfermoney.controlles;
 
 import com.mytask.transfermoney.module.Account;
 import com.mytask.transfermoney.services.AccountService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -54,5 +53,10 @@ public class AccountController {
     @PostMapping("/transfer/{sender}/{receiver}/{amount}")
     public void transferMoney(@PathVariable Long sender, @PathVariable Long receiver, @PathVariable Double amount) {
         accountService.transferMoney(sender, receiver, amount);
+    }
+
+    @PutMapping("/change-password/{id}/{password}")
+    public void changePassword(@PathVariable Long id, @PathVariable String password) {
+        accountService.changePassword(id, password);
     }
 }

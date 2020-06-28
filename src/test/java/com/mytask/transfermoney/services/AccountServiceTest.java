@@ -135,8 +135,11 @@ public class AccountServiceTest {
 
         @Override
         public <S extends Account> @NotNull S save(S s) {
-            accountMap.put(Long.parseLong(String.valueOf(accountMap.size() + 1)), s);
-            return (S) accountMap.get(3L);
+            if (existsById(s.getId())) {
+                return (S) accountMap.put(s.getId(), s);
+            }
+
+            return (S) accountMap.put(Long.parseLong(String.valueOf(accountMap.size() + 1)), s);
         }
 
         @Override
@@ -472,5 +475,40 @@ public class AccountServiceTest {
                 .get().getClientBalance(), senderBalance - amount);
         Assertions.assertEquals(accountService.getAccountById(ids[1])
                 .get().getClientBalance(), receiverBalance + amount);
+    }
+
+    @Test
+    public void givenNullId_whenChangePassword_thenThrowNullPointerException() {
+        Long id = null;
+        String password = "password";
+        NullPointerException exception = Assertions
+                .assertThrows(NullPointerException.class, () -> accountService.changePassword(id, password));
+        Assertions.assertEquals("id is null", exception.getMessage());
+    }
+
+    @Test
+    public void givenNullPassword_whenChangePassword_thenThrowNullPointerException() {
+        Long id = 1L;
+        String password = null;
+        NullPointerException exception = Assertions
+                .assertThrows(NullPointerException.class, () -> accountService.changePassword(id, password));
+        Assertions.assertEquals("password is null", exception.getMessage());
+    }
+
+    @Test
+    public void givenInvalidId_whenChangePassword_thenThrowNullPointerException() {
+        Long id = Long.MAX_VALUE;
+        String password = "password";
+        IllegalArgumentException exception = Assertions
+                .assertThrows(IllegalArgumentException.class, () -> accountService.changePassword(id, password));
+        Assertions.assertEquals("id is invalid", exception.getMessage());
+    }
+
+    @Test
+    public void givenValidIdAndPassword_whenChangePassword_thenChangePassword() {
+        Long id = 1L;
+        String newPassword = "new-password";
+        accountService.changePassword(id, newPassword);
+        Assertions.assertNotEquals(newPassword, accountMap.get(id).getClientPassword());
     }
 }

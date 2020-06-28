@@ -23,14 +23,14 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    // =============================Get All Accounts=============================
 
+    // =============================Get All Accounts=============================
     public List<Account> getAllClients() {
         return accountRepository.findAll();
     }
 
-    // =============================Get Account By Id=============================
 
+    // =============================Get Account By Id=============================
     public Optional<Account> getAccountById(Long id) {
         throwIfNullId(id);
         throwIfNegativeId(id);
@@ -39,8 +39,8 @@ public class AccountService {
         return accountRepository.findById(id);
     }
 
-    // =============================Get Account By Username=============================
 
+    // =============================Get Account By Username=============================
     public Account getAccountByUsername(String username) {
         throwIfNullUsername(username);
         throwIfUsernameNotFound(username);
@@ -48,8 +48,8 @@ public class AccountService {
         return accountRepository.findAccountByClientUsername(username);
     }
 
-    // =============================Save New Account=============================
 
+    // =============================Save New Account=============================
     public Account saveNewAccount(Account account) {
         throwIfNullAccount(account);
         throwIfUsernameTaken(account);
@@ -66,8 +66,8 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    // =============================Update Exist Account=============================
 
+    // =============================Update Exist Account=============================
     public Account updateExistAccount(Long id, Account account) {
         throwIfNullId(id);
         throwIfNullAccount(account);
@@ -77,13 +77,25 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    // =============================Remove Account By Id=============================
 
+    // =============================Remove Account By Id=============================
     public void removeAccountById(Long id) {
-        throwIfNullId(id);
         throwIfNotFoundId(id);
+        throwIfNullId(id);
 
         accountRepository.deleteById(id);
+    }
+
+    // =============================Change Password=============================
+
+    public void changePassword(Long id, String password) {
+        throwIfNullPassword(password);
+        throwIfNullId(id);
+        throwIfInvalidId(id);
+
+        Account account = getAccountById(id).get();
+        account.setClientPassword(new BCryptPasswordEncoder().encode(password));
+        accountRepository.save(account);
     }
 
     // =============================Transfer money=============================
@@ -112,22 +124,21 @@ public class AccountService {
         accountRepository.saveAll(res);
     }
 
-
-/*  [#]==========================================================================================================
-    [#]
-    [#]              ___           ___                       ___           ___          _____          ___
-    [#]             /__/\         /  /\          ___        /__/\         /  /\        /  /::\        /  /\
-    [#]            |  |::\       /  /:/_        /  /\       \  \:\       /  /::\      /  /:/\:\      /  /:/_
-    [#]            |  |:|:\     /  /:/ /\      /  /:/        \__\:\     /  /:/\:\    /  /:/  \:\    /  /:/ /\
-    [#]          __|__|:|\:\   /  /:/ /:/_    /  /:/     ___ /  /::\   /  /:/  \:\  /__/:/ \__\:|  /  /:/ /::\
-    [#]         /__/::::| \:\ /__/:/ /:/ /\  /  /::\    /__/\  /:/\:\ /__/:/ \__\:\ \  \:\ /  /:/ /__/:/ /:/\:\
-    [#]         \  \:\~~\__\/ \  \:\/:/ /:/ /__/:/\:\   \  \:\/:/__\/ \  \:\ /  /:/  \  \:\  /:/  \  \:\/:/~/:/
-    [#]          \  \:\        \  \::/ /:/  \__\/  \:\   \  \::/       \  \:\  /:/    \  \:\/:/    \  \::/ /:/
-    [#]           \  \:\        \  \:\/:/        \  \:\   \  \:\        \  \:\/:/      \  \::/      \__\/ /:/
-    [#]            \  \:\        \  \::/          \__\/    \  \:\        \  \::/        \__\/         /__/:/
-    [#]             \__\/         \__\/                     \__\/         \__\/                       \__\/
-    [#]
-    [#]========================================================================================================== */
+    /*  [#]==========================================================================================================
+        [#]
+        [#]              ___           ___                       ___           ___          _____          ___
+        [#]             /__/\         /  /\          ___        /__/\         /  /\        /  /::\        /  /\
+        [#]            |  |::\       /  /:/_        /  /\       \  \:\       /  /::\      /  /:/\:\      /  /:/_
+        [#]            |  |:|:\     /  /:/ /\      /  /:/        \__\:\     /  /:/\:\    /  /:/  \:\    /  /:/ /\
+        [#]          __|__|:|\:\   /  /:/ /:/_    /  /:/     ___ /  /::\   /  /:/  \:\  /__/:/ \__\:|  /  /:/ /::\
+        [#]         /__/::::| \:\ /__/:/ /:/ /\  /  /::\    /__/\  /:/\:\ /__/:/ \__\:\ \  \:\ /  /:/ /__/:/ /:/\:\
+        [#]         \  \:\~~\__\/ \  \:\/:/ /:/ /__/:/\:\   \  \:\/:/__\/ \  \:\ /  /:/  \  \:\  /:/  \  \:\/:/~/:/
+        [#]          \  \:\        \  \::/ /:/  \__\/  \:\   \  \::/       \  \:\  /:/    \  \:\/:/    \  \::/ /:/
+        [#]           \  \:\        \  \:\/:/        \  \:\   \  \:\        \  \:\/:/      \  \::/      \__\/ /:/
+        [#]            \  \:\        \  \::/          \__\/    \  \:\        \  \::/        \__\/         /__/:/
+        [#]             \__\/         \__\/                     \__\/         \__\/                       \__\/
+        [#]
+        [#]========================================================================================================== */
 
     private void throwIfNotFoundId(Long id) {
         if (!accountRepository.existsById(id)) {
@@ -219,4 +230,15 @@ public class AccountService {
         }
     }
 
+    private void throwIfNullPassword(String password) {
+        if (Objects.isNull(password)) {
+            throw new NullPointerException("password is null");
+        }
+    }
+
+    private void throwIfInvalidId(Long id) {
+        if (!accountRepository.existsById(id)) {
+            throw new IllegalArgumentException("id is invalid");
+        }
+    }
 }

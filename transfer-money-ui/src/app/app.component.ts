@@ -54,4 +54,8 @@ export class AppComponent implements OnInit {
   gotoSettings() {
     this.router.navigate(['settings']);
   }
+
+  gotoChangePassword() {
+    this.router.navigate(['change-password']);
+  }
 }
