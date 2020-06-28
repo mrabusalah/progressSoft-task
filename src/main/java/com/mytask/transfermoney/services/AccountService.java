@@ -80,8 +80,8 @@ public class AccountService {
 
     // =============================Remove Account By Id=============================
     public void removeAccountById(Long id) {
-        throwIfNotFoundId(id);
         throwIfNullId(id);
+        throwIfNotFoundId(id);
 
         accountRepository.deleteById(id);
     }
