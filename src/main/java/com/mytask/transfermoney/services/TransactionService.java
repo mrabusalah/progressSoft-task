@@ -112,8 +112,8 @@ public class TransactionService {
     }
 
     private void throwIfInvalidSenderIdOrReceiverId(Long sender, Long receiver) {
-        if (!transactionRepository.existsById(sender) || !transactionRepository.existsById(receiver)) {
-            throw new IllegalArgumentException((!transactionRepository.existsById(sender) ? "sender " : "receiver ") + "id is invalid");
+        if (!transactionRepository.existsBySenderId(sender) || !transactionRepository.existsByReceiverId(receiver)) {
+            throw new IllegalArgumentException((!transactionRepository.existsBySenderId(sender) ? "sender " : "receiver ") + "id is invalid");
         }
     }
 

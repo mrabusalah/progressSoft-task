@@ -35,10 +35,10 @@ export class TransactionService {
     return this.http.get(`${this.baseUrl}/transactions/sender/${clientId}`);
   }
 
-  addNewTransaction(sender: number, second: number, amount: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/transactions/create-transaction/${sender}/${second}/${amount}`, {
+  addNewTransaction(sender: number, receiver: number, amount: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/transactions/create-transaction/${sender}/${receiver}/${amount}`, {
       sender,
-      second,
+      receiver,
       amount
     });
   }
