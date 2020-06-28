@@ -14,5 +14,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findAllByReceiverIdOrderByDateDesc(Long id);
 
     List<Transaction> findAllBySenderIdOrReceiverIdOrderByDateDesc(Long senderId, Long receiverId);
-    
+
+    boolean existsBySenderId(Long id);
+
+    boolean existsByReceiverId(Long id);
+
 }

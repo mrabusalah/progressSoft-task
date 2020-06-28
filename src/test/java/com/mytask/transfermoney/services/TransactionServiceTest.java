@@ -1,8 +1,6 @@
 package com.mytask.transfermoney.services;
 
-import com.mytask.transfermoney.module.Account;
 import com.mytask.transfermoney.module.Transaction;
-import com.mytask.transfermoney.repositories.AccountRepository;
 import com.mytask.transfermoney.repositories.TransactionRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
@@ -66,6 +64,28 @@ public class TransactionServiceTest {
                 result.add(transactionMap.get(i));
             }
             return result;
+        }
+
+        @Override
+        public boolean existsBySenderId(Long id) {
+            int size = transactionMap.size();
+            for (long i = 1; i <= size; i++) {
+                if(transactionMap.get(i).getSenderId().equals(id)){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean existsByReceiverId(Long id) {
+            int size = transactionMap.size();
+            for (long i = 1; i <= size; i++) {
+                if(transactionMap.get(i).getReceiverId().equals(id)){
+                    return true;
+                }
+            }
+            return false;
         }
 
         @Override
@@ -188,137 +208,6 @@ public class TransactionServiceTest {
         public <S extends Transaction> boolean exists(Example<S> example) {
             return false;
         }
-    }, new AccountRepository() {
-        @Override
-        public Boolean existsAccountByClientUsername(String username) {
-            return null;
-        }
-
-        @Override
-        public Account findAccountByClientUsername(String username) {
-            return null;
-        }
-
-        @Override
-        public List<Account> findAll() {
-            return null;
-        }
-
-        @Override
-        public List<Account> findAll(Sort sort) {
-            return null;
-        }
-
-        @Override
-        public List<Account> findAllById(Iterable<Long> iterable) {
-            return null;
-        }
-
-        @Override
-        public <S extends Account> List<S> saveAll(Iterable<S> iterable) {
-            return null;
-        }
-
-        @Override
-        public void flush() {
-
-        }
-
-        @Override
-        public <S extends Account> S saveAndFlush(S s) {
-            return null;
-        }
-
-        @Override
-        public void deleteInBatch(Iterable<Account> iterable) {
-
-        }
-
-        @Override
-        public void deleteAllInBatch() {
-
-        }
-
-        @Override
-        public Account getOne(Long aLong) {
-            return null;
-        }
-
-        @Override
-        public <S extends Account> List<S> findAll(Example<S> example) {
-            return null;
-        }
-
-        @Override
-        public <S extends Account> List<S> findAll(Example<S> example, Sort sort) {
-            return null;
-        }
-
-        @Override
-        public Page<Account> findAll(Pageable pageable) {
-            return null;
-        }
-
-        @Override
-        public <S extends Account> S save(S s) {
-            return null;
-        }
-
-        @Override
-        public Optional<Account> findById(Long aLong) {
-            return Optional.empty();
-        }
-
-        @Override
-        public boolean existsById(Long aLong) {
-            return false;
-        }
-
-        @Override
-        public long count() {
-            return 0;
-        }
-
-        @Override
-        public void deleteById(Long aLong) {
-
-        }
-
-        @Override
-        public void delete(Account account) {
-
-        }
-
-        @Override
-        public void deleteAll(Iterable<? extends Account> iterable) {
-
-        }
-
-        @Override
-        public void deleteAll() {
-
-        }
-
-        @Override
-        public <S extends Account> Optional<S> findOne(Example<S> example) {
-            return Optional.empty();
-        }
-
-        @Override
-        public <S extends Account> Page<S> findAll(Example<S> example, Pageable pageable) {
-            return null;
-        }
-
-        @Override
-        public <S extends Account> long count(Example<S> example) {
-            return 0;
-        }
-
-        @Override
-        public <S extends Account> boolean exists(Example<S> example) {
-            return false;
-        }
-
     });
 
     @Test
