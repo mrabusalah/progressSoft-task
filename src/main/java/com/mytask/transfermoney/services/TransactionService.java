@@ -106,14 +106,14 @@ public class TransactionService {
     }
 
     private void throwIfInvalidId(Long id) {
-        if (!transactionRepository.existsBySenderId(id) && !transactionRepository.existsByReceiverId(id)) {
+        if (transactionRepository.existsBySenderId(id) && transactionRepository.existsByReceiverId(id)) {
             throw new IllegalArgumentException("id not found");
         }
     }
 
     private void throwIfInvalidSenderIdOrReceiverId(Long sender, Long receiver) {
-        if (!transactionRepository.existsBySenderId(sender) || !transactionRepository.existsByReceiverId(receiver)) {
-            throw new IllegalArgumentException((!transactionRepository.existsBySenderId(sender) ? "sender " : "receiver ") + "id is invalid");
+        if (transactionRepository.existsBySenderId(sender) || transactionRepository.existsByReceiverId(receiver)) {
+            throw new IllegalArgumentException((transactionRepository.existsBySenderId(sender) ? "sender " : "receiver ") + "id is invalid");
         }
     }
 
@@ -142,7 +142,7 @@ public class TransactionService {
     }
 
     private void throwIfInvalidSenderId(Long id) {
-        if (!transactionRepository.existsBySenderId(id)) {
+        if (transactionRepository.existsBySenderId(id)) {
             throw new IllegalArgumentException("invalid sender id");
         }
     }
@@ -154,7 +154,7 @@ public class TransactionService {
     }
 
     private void throwIfInvalidReceiverId(Long id) {
-        if (!transactionRepository.existsByReceiverId(id)) {
+        if (transactionRepository.existsByReceiverId(id)) {
             throw new IllegalArgumentException("invalid receiver id");
         }
     }

@@ -66,7 +66,8 @@
 
                     <ng-container matColumnDef="date">
                       <th mat-header-cell *matHeaderCellDef>Date</th>
-                      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                      <td mat-cell *matCellDef="let element"> {{element.date.substring(0, 10)}}
+                        - {{element.date.substring(11, 19)}} </td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns" class="text-center"></tr>
@@ -106,7 +107,8 @@
 
                     <ng-container matColumnDef="date">
                       <th mat-header-cell *matHeaderCellDef>Date</th>
-                      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                      <td mat-cell *matCellDef="let element"> {{element.date.substring(0, 10)}}
+                        - {{element.date.substring(11, 19)}} </td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns" class="text-center"></tr>
@@ -146,7 +148,8 @@
 
                     <ng-container matColumnDef="date">
                       <th mat-header-cell *matHeaderCellDef>Date</th>
-                      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                      <td mat-cell *matCellDef="let element"> {{element.date.substring(0, 10)}}
+                        - {{element.date.substring(11, 19)}} </td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns" class="text-center"></tr>

@@ -71,10 +71,10 @@ public class TransactionServiceTest {
             int size = transactionMap.size();
             for (long i = 1; i <= size; i++) {
                 if(transactionMap.get(i).getSenderId().equals(id)){
-                    return true;
+                    return false;
                 }
             }
-            return false;
+            return true;
         }
 
         @Override
@@ -82,10 +82,10 @@ public class TransactionServiceTest {
             int size = transactionMap.size();
             for (long i = 1; i <= size; i++) {
                 if(transactionMap.get(i).getReceiverId().equals(id)){
-                    return true;
+                    return false;
                 }
             }
-            return false;
+            return true;
         }
 
         @Override
