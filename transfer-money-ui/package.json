@@ -29,6 +29,7 @@
     "bootstrap": "^4.4.1",
     "currency-flags": "^2.1.2",
     "jquery": "^3.5.0",
+    "moment": "^2.27.0",
     "ng-zorro-antd": "^9.1.0",
     "ngx-mat-select-search": "^2.2.0",
     "ngx-wow": "^2.0.1",
