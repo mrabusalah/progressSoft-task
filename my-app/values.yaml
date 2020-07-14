@@ -1,0 +1,64 @@
+replicaCount: 1
+
+image:
+  repository: mrabusalah/transfer-money-ps
+  tag: 1.0
+  pullPolicy: Always
+
+service:
+  name: my-app
+  type: ClusterIP
+  internalPort: 8070
+  externalPort: 8080
+
+mysql:
+  deploy: true
+  mysqlRootPassword: root
+  mysqlUser: root
+  mysqlPassword: P@ssw0rd_root
+  mysqlDatabase: Bank
+  persistence:
+    enabled: true
+  livenessProbe:
+    enabled: false
+  readinessProbe:
+    enabled: false
+  resources:
+    limits:
+      cpu: 500m
+      memory: 756Mi
+    requests:
+      cpu: 50m
+      memory: 256Mi
+
+app:
+  env:
+    config:
+      source: my-app.properties
+      name: configmap-{{ .Values.Name }}-{{ .Values.app.env.config.source }}
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1500Mi
+  requests:
+    cpu: 50m
+    memory: 256Mi
+
+ingress:
+  enabled: false
+  annotations: {}
+  path: /
+  hosts:
+    - chart-example.local
+  tls: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
