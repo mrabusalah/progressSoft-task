@@ -1,0 +1,5 @@
+dependencies:
+  - name:  mysql
+    version: "5.7.28"
+    condition: mysql.deploy
+    repository:
