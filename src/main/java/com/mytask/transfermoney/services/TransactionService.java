@@ -1,6 +1,7 @@
 package com.mytask.transfermoney.services;
 
 import com.mytask.transfermoney.module.Transaction;
+import com.mytask.transfermoney.repositories.AccountRepository;
 import com.mytask.transfermoney.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,9 +17,10 @@ public class TransactionService {
 
     @Autowired
     private final TransactionRepository transactionRepository;
-
-    public TransactionService(TransactionRepository transactionRepository) {
+    private final AccountRepository accountRepository;
+    public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository) {
         this.transactionRepository = transactionRepository;
+        this.accountRepository = accountRepository;
     }
 
     public List<Transaction> getAllTransactions() {
@@ -106,14 +108,14 @@ public class TransactionService {
     }
 
     private void throwIfInvalidId(Long id) {
-        if (!transactionRepository.existsBySenderId(id) || !transactionRepository.existsByReceiverId(id)) {
+        if (!accountRepository.existsById(id)) {
             throw new IllegalArgumentException("id not found");
         }
     }
 
     private void throwIfInvalidSenderIdOrReceiverId(Long sender, Long receiver) {
-        if (transactionRepository.existsBySenderId(sender) || transactionRepository.existsByReceiverId(receiver)) {
-            throw new IllegalArgumentException((transactionRepository.existsBySenderId(sender) ? "sender " : "receiver ") + "id is invalid");
+        if (!accountRepository.existsById(sender) || !accountRepository.existsById(receiver)) {
+            throw new IllegalArgumentException((!accountRepository.existsById(sender) ? "sender " : "receiver ") + "id is invalid");
         }
     }
 
@@ -142,7 +144,7 @@ public class TransactionService {
     }
 
     private void throwIfInvalidSenderId(Long id) {
-        if (!transactionRepository.existsBySenderId(id)) {
+        if (!accountRepository.existsById(id)) {
             throw new IllegalArgumentException("invalid sender id");
         }
     }
@@ -154,7 +156,7 @@ public class TransactionService {
     }
 
     private void throwIfInvalidReceiverId(Long id) {
-        if (!transactionRepository.existsByReceiverId(id)) {
+        if(!accountRepository.existsById(id)){
             throw new IllegalArgumentException("invalid receiver id");
         }
     }
