@@ -108,7 +108,7 @@ public class TransactionService {
     }
 
     private void throwIfInvalidId(Long id) {
-        if (!transactionRepository.existsById(id)) {
+        if (!accountRepository.existsById(id)) {
             throw new IllegalArgumentException("id not found");
         }
     }
