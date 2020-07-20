@@ -15,16 +15,16 @@ export class TransactionService {
   }
 
   getAllTransactions(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/transactions/all-transactions`);
+    return this.http.get(`${this.baseUrl}/transactions`);
   }
 
   getAllTransactionsPage(pageNumber: number, numberOfItems: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/transactions/all-transactions/page?page=${pageNumber - 1}&size=${numberOfItems}`);
+    return this.http.get<any>(`${this.baseUrl}/transactions/page?page=${pageNumber - 1}&size=${numberOfItems}`);
   }
 
 
   getAllTransactionsById(clientId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/transactions/all-transactions/${clientId}`);
+    return this.http.get(`${this.baseUrl}/transactions/${clientId}`);
   }
 
   getAllTransactionsByReceiverId(clientId: number): Observable<any> {
@@ -36,7 +36,7 @@ export class TransactionService {
   }
 
   addNewTransaction(sender: number, receiver: number, amount: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/transactions/create-transaction/${sender}/${receiver}/${amount}`, {
+    return this.http.post(`${this.baseUrl}/transactions/${sender}/${receiver}/${amount}`, {
       sender,
       receiver,
       amount
