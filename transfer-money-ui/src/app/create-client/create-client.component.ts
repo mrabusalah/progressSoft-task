@@ -18,6 +18,7 @@ export class CreateClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.client = new Account();
   }
 
   save() {
@@ -38,7 +39,6 @@ export class CreateClientComponent implements OnInit {
         });
         console.log(error);
       });
-    this.client = new Account();
   }
 
   onSubmit() {
