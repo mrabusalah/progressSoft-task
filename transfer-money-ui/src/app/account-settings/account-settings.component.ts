@@ -18,7 +18,9 @@ export class AccountSettingsComponent implements OnInit {
     });
   }
 
+
   ngOnInit(): void {
+    this.client = new Account();
   }
 
   save() {
@@ -38,7 +40,6 @@ export class AccountSettingsComponent implements OnInit {
         });
         console.log(error);
       });
-    this.client = new Account();
   }
 
   gotoHome() {

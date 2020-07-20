@@ -21,6 +21,7 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.newPassword = '';
+    this.client = new Account();
   }
 
   save() {
@@ -40,7 +41,6 @@ export class ChangePasswordComponent implements OnInit {
         });
         console.log(error);
       });
-    this.client = new Account();
   }
 
   gotoHome() {
