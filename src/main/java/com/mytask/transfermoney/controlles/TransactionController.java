@@ -20,18 +20,18 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @GetMapping("/transactions/all-transactions")
+    @GetMapping("/transactions")
     public List<Transaction> getAllTransactions() {
         return transactionService.getAllTransactions();
     }
 
-    @GetMapping("/transactions/all-transactions/page")
+    @GetMapping("/transactions/page")
     public Page<Transaction> getAllTransactionsPage(Pageable pageable) {
         return transactionService.getAllTransactionsPage(pageable);
     }
 
 
-    @GetMapping("/transactions/all-transactions/{id}")
+    @GetMapping("/transactions/{id}")
     public List<Transaction> getAllTransactionsById(@PathVariable Long id) {
         return transactionService.getAllTransactionsById(id);
     }
@@ -51,13 +51,7 @@ public class TransactionController {
         return transactionService.getTransactionById(id);
     }
 
-//    @RequestMapping(value = "/transactions/all-transactions/pagination", method = RequestMethod.GET)
-//    Page<Transaction> employeesPageable() {
-//        return transactionService.page(pageable);
-//
-//    }
-
-    @PostMapping("/transactions/create-transaction/{sender}/{receiver}/{amount}")
+    @PostMapping("/transactions/{sender}/{receiver}/{amount}")
     public Transaction addTransaction(@PathVariable Long sender, @PathVariable Long receiver, @PathVariable double amount) {
         return transactionService.addTransaction(sender, receiver, amount);
     }

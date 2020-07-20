@@ -26,7 +26,7 @@ export class AccountService {
   }
 
   getClientsList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/clients/all-clients`);
+    return this.http.get(`${this.baseUrl}/clients`);
   }
 
   getClientById(id: number): Observable<any> {
@@ -34,15 +34,15 @@ export class AccountService {
   }
 
   deleteClient(clientId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/clients/delete-client/${clientId}`, {responseType: 'text'});
+    return this.http.delete(`${this.baseUrl}/clients/${clientId}`, {responseType: 'text'});
   }
 
   createClient(client: Account): Observable<object> {
-    return this.http.post(`${this.baseUrl}/clients/create-client`, client);
+    return this.http.post(`${this.baseUrl}/clients`, client);
   }
 
   updateClient(client: Account, id: number): Observable<object> {
-    return this.http.put(`${this.baseUrl}/clients/update-client/${id}`, client);
+    return this.http.put(`${this.baseUrl}/clients/${id}`, client);
   }
 
   getClientByUsername(username: string): Observable<any> {

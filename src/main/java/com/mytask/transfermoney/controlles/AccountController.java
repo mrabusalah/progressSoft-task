@@ -19,7 +19,7 @@ public class AccountController {
     }
 
 
-    @GetMapping("/clients/all-clients")
+    @GetMapping("/clients")
     public List<Account> getAllAccounts() {
         return accountService.getAllClients();
     }
@@ -34,20 +34,18 @@ public class AccountController {
         return accountService.getAccountByUsername(username);
     }
 
-    @PostMapping("/clients/create-client")
+    @PostMapping("/clients")
     public Account saveNewAccount(@Valid @RequestBody Account account) throws Exception {
-//        return accountService.saveNewAccount(account);
-        Thread.sleep(2000);
-        throw new Exception();
+        return accountService.saveNewAccount(account);
     }
 
 
-    @PutMapping("/clients/update-client/{id}")
+    @PutMapping("/clients/{id}")
     public Account updateExistAccount(@PathVariable Long id, @Valid @RequestBody Account account) {
         return accountService.updateExistAccount(id, account);
     }
 
-    @DeleteMapping("/clients/delete-client/{id}")
+    @DeleteMapping("/clients/{id}")
     public void removeAccountById(@PathVariable Long id) {
         accountService.removeAccountById(id);
     }
