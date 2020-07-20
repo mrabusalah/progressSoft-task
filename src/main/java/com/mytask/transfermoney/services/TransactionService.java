@@ -35,7 +35,6 @@ public class TransactionService {
         return transactionRepository.findAll(pageable);
     }
 
-    //================================Get Transaction By Id================================
 
     public Optional<Transaction> getTransactionById(Long id) {
         throwIfNullId(id);
@@ -44,7 +43,6 @@ public class TransactionService {
         return transactionRepository.findById(id);
     }
 
-    //================================Add New Transaction================================
 
     public Transaction addTransaction(Long sender, Long receiver, Double amount) {
         throwIfNullSenderIdOrReceiverId(sender, receiver);
@@ -57,8 +55,6 @@ public class TransactionService {
         return transactionRepository.save(transaction);
     }
 
-    //================================Get Transactions By UserId================================
-
     public List<Transaction> getAllTransactionsBySenderId(Long id) {
         throwIfNullSenderId(id);
         throwIfInvalidSenderId(id);
@@ -66,16 +62,12 @@ public class TransactionService {
         return transactionRepository.findAllBySenderIdOrderByDateDesc(id);
     }
 
-    //================================Get Transaction By ReceiverId================================
-
     public List<Transaction> getAllTransactionsByReceiverId(Long id) {
         throwIfNullReceiverId(id);
         throwIfInvalidReceiverId(id);
 
         return transactionRepository.findAllByReceiverIdOrderByDateDesc(id);
     }
-
-    //================================Get Transaction By ReceiverId================================
 
     public List<Transaction> getAllTransactionsById(Long id) {
         throwIfNullId(id);
