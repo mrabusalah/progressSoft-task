@@ -35,8 +35,10 @@ public class AccountController {
     }
 
     @PostMapping("/clients/create-client")
-    public Account saveNewAccount(@Valid @RequestBody Account account) {
-        return accountService.saveNewAccount(account);
+    public Account saveNewAccount(@Valid @RequestBody Account account) throws Exception {
+//        return accountService.saveNewAccount(account);
+        Thread.sleep(2000);
+        throw new Exception();
     }
 
 

@@ -24,13 +24,11 @@ public class AccountService {
     }
 
 
-    // =============================Get All Accounts=============================
     public List<Account> getAllClients() {
         return accountRepository.findAll();
     }
 
 
-    // =============================Get Account By Id=============================
     public Optional<Account> getAccountById(Long id) {
         throwIfNullId(id);
         throwIfNegativeId(id);
@@ -40,7 +38,6 @@ public class AccountService {
     }
 
 
-    // =============================Get Account By Username=============================
     public Account getAccountByUsername(String username) {
         throwIfNullUsername(username);
         throwIfUsernameNotFound(username);
@@ -49,7 +46,6 @@ public class AccountService {
     }
 
 
-    // =============================Save New Account=============================
     public Account saveNewAccount(Account account) {
         throwIfNullAccount(account);
         throwIfUsernameTaken(account);
@@ -67,18 +63,15 @@ public class AccountService {
     }
 
 
-    // =============================Update Exist Account=============================
     public Account updateExistAccount(Long id, Account account) {
         throwIfNullId(id);
         throwIfNullAccount(account);
         throwIfNotFoundId(id);
-        // TODO make change password separated
-        // account.setClientPassword(new BCryptPasswordEncoder().encode(account.getClientPassword()));
+
         return accountRepository.save(account);
     }
 
 
-    // =============================Remove Account By Id=============================
     public void removeAccountById(Long id) {
         throwIfNullId(id);
         throwIfNotFoundId(id);
@@ -86,7 +79,6 @@ public class AccountService {
         accountRepository.deleteById(id);
     }
 
-    // =============================Change Password=============================
 
     public void changePassword(Long id, String password) {
         throwIfNullPassword(password);
@@ -98,7 +90,6 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    // =============================Transfer money=============================
 
     @Transactional
     public void transferMoney(Long sender, Long receiver, Double amount) {
